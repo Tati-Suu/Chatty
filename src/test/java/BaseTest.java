@@ -2,6 +2,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
@@ -11,8 +12,13 @@ public class BaseTest {
     public void setUp(){
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+        ChromeOptions options=new ChromeOptions();
+        options.addArguments("--disable-search-engine-choice-screen");
 
-        open("http://chatty.telran-edu.de:8089/login");
+        //http://chatty.telran-edu.de:8089/registration
+
+        open("http://chatty.telran-edu.de:8089/registration");
+        //open("http://chatty.telran-edu.de:8089/login");
 
     }
 
