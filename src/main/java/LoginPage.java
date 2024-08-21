@@ -2,6 +2,7 @@
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class LoginPage {
@@ -15,7 +16,7 @@ public class LoginPage {
     // private SelenideElement signInButton = $x("//[@id=\"root\"]/div/div/form/p/a");
     private SelenideElement emailErrorMessage = $x("(//*[@class='text-error'])[1]");
     private SelenideElement unregisteredUsernameError = $x("//*[@class='text-error']");
-    private SelenideElement passwordRequirementsMessage = $x("//*[@class='text-error']");
+    private SelenideElement passwordRequirementsMessage = $(".text-error");
 
     public LoginPage enterEmail(String email) {
         emailEditBox.setValue(email);
@@ -41,8 +42,11 @@ public class LoginPage {
         return passwordRequirementsMessage.shouldBe(visible).exists();
     }
 
-    public String getPasswordRequirementsMessage() {
-        return passwordRequirementsMessage.shouldBe(visible).getText();
+    //public String getPasswordRequirementsMessage() {
+      //  return passwordRequirementsMessage.shouldBe(visible).getText();
+    //}
+    public SelenideElement getPasswordRequirementsMessage() {
+        return passwordRequirementsMessage;
     }
 
     public String getEmptyFieldsErrorMessage() {
