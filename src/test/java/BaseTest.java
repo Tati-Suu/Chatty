@@ -1,5 +1,6 @@
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -28,6 +29,8 @@ public class BaseTest {
     }
 
     LoginPage loginPage = new LoginPage();
+    HeaderPage headerPage = new HeaderPage();
+    ContactUsPage contactUsPage = new ContactUsPage();
 
 
     AdminPage adminPage = new AdminPage();
