@@ -21,7 +21,10 @@ public class UserProfileEditPage {
     private SelenideElement userMenu = $x("//p[contains(text(), 'Hello,')]");
     private SelenideElement profileLink = $x("//a[@href='/userprofile' and text()='Your Profile']");
     private SelenideElement visibleProfilePage = $x("//a[@href='/userprofile' and text()='Your Profile']");
-
+    private SelenideElement toggleMyPostsLabel = $("label[for='myPostsId']");
+    private SelenideElement firstPost = $x("(//div[@class='post-card'])[1]");
+    private SelenideElement postTitle = $x("//input[@name='postTitle']");
+    private SelenideElement postContent = $x("//textarea[@name='postContent']");
 
     public SelenideElement getEditButtonPlus() {
         return editButtonPlus;
@@ -61,6 +64,20 @@ public class UserProfileEditPage {
     }
     public SelenideElement getVisibleProfilePage() {
         return visibleProfilePage;
+    }
+    public SelenideElement getToggleMyPostsLabel() {
+        return toggleMyPostsLabel;
+    }
+    public SelenideElement getFirstPost() {
+        return firstPost;
+    }
+
+    public SelenideElement getPostTitle() {
+        return postTitle;
+    }
+
+    public SelenideElement getPostContent() {
+        return postContent;
     }
 
 }
