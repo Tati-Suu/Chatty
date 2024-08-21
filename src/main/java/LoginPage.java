@@ -11,9 +11,6 @@ public class LoginPage {
     private SelenideElement emailEditBox = $x("//*[@name='email']");
     private SelenideElement passwordEditBox = $x("//*[@name='password']");
     private SelenideElement loginButton = $x("//button[@type='submit']");
-    private SelenideElement formElement = $x("//*[@class='form']");
-    // private SelenideElement signUpLink = $x("//[@id=\"root\"]/div/div/p/a");
-    // private SelenideElement signInButton = $x("//[@id=\"root\"]/div/div/form/p/a");
     private SelenideElement emailErrorMessage = $x("(//*[@class='text-error'])[1]");
     private SelenideElement unregisteredUsernameError = $x("//*[@class='text-error']");
     private SelenideElement passwordRequirementsMessage = $(".text-error");
@@ -38,13 +35,6 @@ public class LoginPage {
         System.out.println("Error message received: " + errorMessage);
         return errorMessage;
     }
-    public boolean isPasswordRequirementsMessageDisplayed() {
-        return passwordRequirementsMessage.shouldBe(visible).exists();
-    }
-
-    //public String getPasswordRequirementsMessage() {
-      //  return passwordRequirementsMessage.shouldBe(visible).getText();
-    //}
     public SelenideElement getPasswordRequirementsMessage() {
         return passwordRequirementsMessage;
     }

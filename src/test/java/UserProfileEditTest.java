@@ -3,10 +3,10 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class UserProfileEditTest extends BaseTest {
     @BeforeEach
@@ -39,20 +39,6 @@ public class UserProfileEditTest extends BaseTest {
         userProfileEditPage.getBirthDateField().shouldHave(Condition.value("1992-03-21"));
         userProfileEditPage.getPhoneField().shouldHave(Condition.value("+12536425857"));
     }
-
-    @Test
-    public void verifyToggleMyPostsLabelTest() {
-        UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
-        userProfileEditPage.getToggleMyPostsLabel()
-                .shouldBe(visible)
-                .shouldHave(text("My Posts"));
-        String actualErrorMessage = userProfileEditPage.getToggleMyPostsLabel().getText();
-        String expectedErrorMessage = "See my Posts";
-        sleep(5000);
-        assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Toggle Name");
-    }
-
-
 }
 
 

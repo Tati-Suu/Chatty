@@ -17,6 +17,7 @@ public class HomePage {
     private SelenideElement postPhoto = $x("//[@src='https://chatty-images-s3.s3.eu-central-1.amazonaws.com/a2475ea7-7d39-446c-90b1-c7a1514ae04d/d169afc8-9c41-4516-87df-bb882d9057b3.jpeg']");
     private SelenideElement postDescription = $x("//[@class='postdescription']");
     private SelenideElement postCreateButton = $x("//span[@data-test='post-header__plus']");
+    private SelenideElement firstPost = $x("//div[@data-test='post']");
 
 
     public boolean isPostSectionDisplayed() {
@@ -43,7 +44,6 @@ public class HomePage {
         return this;
     }
 
-
     public HomePage clickOnSaveAsDraftToggle() {
         saveAsDraftToggle.click();
         return this;
@@ -54,16 +54,21 @@ public class HomePage {
         return this;
     }
 
-
     public HomePage clickPostsToggle() {
         myPostsToggle.shouldBe(Condition.enabled).click();
         return this;
     }
 
+    public String getMyPostsToggleText() {
+        return myPostsToggle.shouldBe(Condition.visible).getText();
+    }
 
     public HomePage clickCreatePostPlusButton() {
         postCreateButton.click();
         return this;
-
+    }
+    public HomePage clickFirstPost() {
+        firstPost.shouldBe(Condition.visible).click();
+        return this;
     }
 }
