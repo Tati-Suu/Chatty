@@ -15,10 +15,10 @@ public class BaseTest {
         ChromeOptions options=new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
 
-        //http://chatty.telran-edu.de:8089/registration
 
-        open("http://chatty.telran-edu.de:8089/registration");
-        //open("http://chatty.telran-edu.de:8089/login");
+
+        //open("http://chatty.telran-edu.de:8089/registration");
+        open("http://chatty.telran-edu.de:8089/login");
 
     }
 

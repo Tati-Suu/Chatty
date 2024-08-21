@@ -6,17 +6,18 @@ import static com.codeborne.selenide.Selenide.sleep;
 public class CreateAccountTest extends BaseTest {
      @Test
     public void successLoginUser(){
-         //createAccountPage.clickRegistrationPageRedirect();
-        //open("http://chatty.telran-edu.de:8089/registration");
-        createAccountPage.inputEmail("User456@gmail.com");
-        createAccountPage.inputPassword("User12356789");
+
+         createAccountPage.clickRegistrationPageRedirect();
+         createAccountPage.inputEmail("User456@gmail.com");
+         createAccountPage.inputPassword("User12356789");
          createAccountPage.inputConfirmPassword("User12356789");
+         createAccountPage.selectAdminRoleByClick();
          sleep(5000);
          createAccountPage.clickRegistrationButton();
     }
     @Test
     public void invalidPassword(){
-
+        open("http://chatty.telran-edu.de:8089/registration");
         createAccountPage.inputEmail("User456@gmail.com");
         createAccountPage.inputPassword("Привет12356789");
         createAccountPage.inputConfirmPassword("Привет12356789");

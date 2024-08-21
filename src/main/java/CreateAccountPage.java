@@ -46,9 +46,9 @@ public class CreateAccountPage {
     private SelenideElement adminButton = $("[value=\"admin\"]");
 
         //registrationPageRedirect
-    public HomePage clickRegistrationPageRedirect() {
+    public CreateAccountPage clickRegistrationPageRedirect() {
         registrationPageRedirect.click();
-    return new HomePage();
+    return new CreateAccountPage();
 }
 
     public CreateAccountPage inputEmail(String email) {
