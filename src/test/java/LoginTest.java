@@ -10,6 +10,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void AuthorizationValidData() {
+        open("http://chatty.telran-edu.de:8089");
         LoginPage loginPage = new LoginPage();
         loginPage.enterEmail("hirsch.mariia@icloud.com")
                 .enterPassword("Blabla2024!")
