@@ -17,12 +17,12 @@ public class UserProfileEditTest extends BaseTest {
                 .enterPassword("Blabla2024!")
                 .clickButton();
     }
-    @Test
-    public void EditingUserProfileData() {
-        UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
-
-        sleep(5000);
-
-    }
+//    @Test
+//    public void EditingUserProfileData() {
+//        UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
+//
+//        sleep(5000);
+//
+//    }
 
 }
