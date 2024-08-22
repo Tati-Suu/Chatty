@@ -39,6 +39,29 @@ public class UserProfileEditTest extends BaseTest {
         userProfileEditPage.getBirthDateField().shouldHave(Condition.value("1992-03-21"));
         userProfileEditPage.getPhoneField().shouldHave(Condition.value("+12536425857"));
     }
+    @Test
+    public void fillingInChangePasswordField() {
+        UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
+
+        // Переход в профиль
+        userProfileEditPage.getUserMenu().shouldBe(visible).click();
+        userProfileEditPage.getProfileLink().shouldBe(visible).click();
+        userProfileEditPage.getEditButtonPlus().shouldBe(visible).click();
+
+        // Клик по кнопке "Change Password"
+        userProfileEditPage.clickChangePasswordButton();
+
+        // Проверяем, что поля для паролей отображаются
+        userProfileEditPage.isPasswordBoxDisplayed();
+
+        // Заполняем поля для смены пароля
+        userProfileEditPage.inputOldPassword("Blabla2024!");
+        userProfileEditPage.inputNewPassword("Blabla2024!!");
+        userProfileEditPage.confirmNewPassword("Blabla2024!!");
+
+        // Кликаем по кнопке "Save"
+        userProfileEditPage.clickSavePassButton();
+    }
 }
 
 

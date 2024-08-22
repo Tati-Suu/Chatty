@@ -1,5 +1,7 @@
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -14,6 +16,11 @@ public class UserProfileEditPage {
     private SelenideElement saveButton = $x("//button[@type='submit']");
     private SelenideElement userMenu = $x("//p[contains(text(), 'Hello,')]");
     private SelenideElement profileLink = $x("//a[@href='/userprofile' and text()='Your Profile']");
+    private SelenideElement changePasswordButton = $x("//button[@data-test='profileChangePasswordButton']");
+    private SelenideElement oldPasswordField = $x("//input[@placeholder='Old password']");
+    private SelenideElement newPasswordField = $x("//input[@placeholder='New password']");
+    private SelenideElement confirmPasswordField = $x("//input[@placeholder='Confirm new password']");
+    private SelenideElement savePassButton = $x("//button[contains(@class, 'PasswordModal_pass_btn__eGL9h')]");
 
     public SelenideElement getEditButtonPlus() {
         return editButtonPlus;
@@ -41,5 +48,26 @@ public class UserProfileEditPage {
     }
     public SelenideElement getProfileLink() {
         return profileLink;
+    }
+    public void clickChangePasswordButton() {
+        changePasswordButton.shouldBe(visible).click();
+    }
+    public void isPasswordBoxDisplayed() {
+        oldPasswordField.shouldBe(visible);
+        newPasswordField.shouldBe(visible);
+        confirmPasswordField.shouldBe(visible);
+    }
+    public void inputOldPassword(String oldPassword) {
+        oldPasswordField.setValue(oldPassword);
+
+    }
+    public void inputNewPassword(String newPassword) {
+        newPasswordField.setValue(newPassword);
+    }
+    public void confirmNewPassword(String confirmPassword) {
+        confirmPasswordField.setValue(confirmPassword);
+    }
+    public void clickSavePassButton() {
+        savePassButton.shouldBe(visible).click();
     }
 }

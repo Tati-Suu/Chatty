@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HomePageTest extends BaseTest{
     private HomePage homePage;
@@ -34,12 +35,7 @@ public class HomePageTest extends BaseTest{
     public void verifyPostTitleSearchFieldIsAbsent() {
         sleep(5000);
         int numberOfInputs = $$("input").filterBy(attribute("name", "postTitleSearch")).size();
-        assertEquals(0, numberOfInputs, "The post title search field should not be present.");
-        //The test passed because the parameters specified searching by attributes and the input element, and there were no matches for the post title search.
-        //Тест прошел потому чт в параметраз указала по поиску по атрибутам и инпут элементу что совпадаений для поиска постов по названию нет.
-
-        //int numberOfInputs = $$("input").filterBy(attribute("name", "postTitleSearch")).size();
-       // assertTrue(numberOfInputs > 0, "The post title search field should be present, but it is missing.");
+        assertEquals(numberOfInputs > 0, "The post title search field should be present, but it is missing.");
     }
     @Test
     public void verifySimilarPostsButtonIsAbsent() {
@@ -47,6 +43,6 @@ public class HomePageTest extends BaseTest{
         homePage.clickFirstPost();
         sleep(5000);
         int numberOfButtons = $$("button").filterBy(attribute("data-test", "similar-posts")).size();
-        assertEquals(0, numberOfButtons, "The 'Similar Posts' button should not be present.");
+        assertEquals(numberOfButtons > 0, "The 'Similar Posts' button should be present, but it is missing.");
     }
 }
