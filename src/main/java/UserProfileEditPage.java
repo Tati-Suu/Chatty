@@ -1,6 +1,7 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -21,6 +22,7 @@ public class UserProfileEditPage {
     private SelenideElement newPasswordField = $x("//input[@placeholder='New password']");
     private SelenideElement confirmPasswordField = $x("//input[@placeholder='Confirm new password']");
     private SelenideElement savePassButton = $x("//button[contains(@class, 'PasswordModal_pass_btn__eGL9h')]");
+    private SelenideElement personalInformation = $("[class=\"post-header__feed\"]");
 
     public SelenideElement getEditButtonPlus() {
         return editButtonPlus;
@@ -60,6 +62,10 @@ public class UserProfileEditPage {
     public void inputOldPassword(String oldPassword) {
         oldPasswordField.setValue(oldPassword);
 
+    }
+
+    public void elemPersonalInformationIsDisplayed(String textFormValue){
+        personalInformation.shouldBe(visible).shouldHave(text(textFormValue));
     }
     public void inputNewPassword(String newPassword) {
         newPasswordField.setValue(newPassword);

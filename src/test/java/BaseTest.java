@@ -31,6 +31,8 @@ public class BaseTest {
     LoginPage loginPage = new LoginPage();
     HeaderPage headerPage = new HeaderPage();
     ContactUsPage contactUsPage = new ContactUsPage();
+    DraftPage draftPage = new DraftPage();
+    CreatePostPage createPostPage = new CreatePostPage();
 
 
     AdminPage adminPage = new AdminPage();
@@ -40,5 +42,6 @@ public class BaseTest {
 
     CreateAccountPage createAccountPage = new CreateAccountPage();
     UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
+
 
 }

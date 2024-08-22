@@ -1,6 +1,7 @@
 
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -14,6 +15,7 @@ public class LoginPage {
     private SelenideElement emailErrorMessage = $x("(//*[@class='text-error'])[1]");
     private SelenideElement unregisteredUsernameError = $x("//*[@class='text-error']");
     private SelenideElement passwordRequirementsMessage = $(".text-error");
+    private SelenideElement loginForm = $("h1");
 
     public LoginPage enterEmail(String email) {
         emailEditBox.setValue(email);
@@ -49,6 +51,9 @@ public class LoginPage {
 
     public String getWithWithChineseCharactersInPasswaordErrorMessage() {
         return emailErrorMessage.shouldBe(visible).getText();
+    }
+    public void loginFormIsDisplayed(String textValue){
+        loginForm.shouldBe(visible).shouldHave(text(textValue));
     }
 
     public String getWithShortPassErrorMessage(){

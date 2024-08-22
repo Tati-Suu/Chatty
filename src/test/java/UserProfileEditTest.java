@@ -22,7 +22,7 @@ public class UserProfileEditTest extends BaseTest {
     }
     @Test
     public void EditingUserProfileData() {
-        UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
+        //UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
         userProfileEditPage.getUserMenu().shouldBe(visible).click();
         userProfileEditPage.getProfileLink().shouldBe(visible, visible).click();
         userProfileEditPage.getEditButtonPlus().shouldBe(visible).click();

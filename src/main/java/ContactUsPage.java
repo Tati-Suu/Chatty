@@ -57,8 +57,6 @@ public class ContactUsPage {
     }
     // Заполните это поле ( "This value should't be blank")
 
-
-
     public void emptyFieldErrorMessage() {
         name.shouldHave(Condition.attributeMatching("validationMessage","This value should't be blank"));
     }
