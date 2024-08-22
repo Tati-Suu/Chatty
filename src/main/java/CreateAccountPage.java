@@ -36,10 +36,12 @@ public class CreateAccountPage {
     //Empty
     ////*[@id="root"]/div/div/form/div[1]     #root > div > div > form > div:nth-child(4)
     private SelenideElement userNameEmptyErrorMessage = $("#root > div > div > form > div:nth-child(4)");
-    private SelenideElement passwordEmptyErrorMessage = $(".text-error");
+    private SelenideElement passwordEmptyErrorMessage = $("#root > div > div > form > div:nth-child(6)");
+            //$(".text-error");
             //$("br:nth-child(2)");
    // #root > div > div > form > div.text-error
-    private SelenideElement confirmPasswordEmptyErrorMessage = $("br:nth-child(3)");
+    private SelenideElement confirmPasswordEmptyErrorMessage = $("#root > div > div > form > div:nth-child(8)");
+                    //$("br:nth-child(3)");
 
     //от Альбины
     private SelenideElement selectButton = $("select");

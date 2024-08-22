@@ -39,5 +39,6 @@ public class BaseTest {
     HomePage homePage = new HomePage();
 
     CreateAccountPage createAccountPage = new CreateAccountPage();
+    UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
 
 }

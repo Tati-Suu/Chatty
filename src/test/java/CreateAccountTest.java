@@ -30,7 +30,7 @@ public class CreateAccountTest extends BaseTest {
     //invalid username
     @Test
     public void invalidUsername(){
-
+        open("http://chatty.telran-edu.de:8089/registration");
         createAccountPage.inputEmail("User456Ошибка@gmail.com");
         createAccountPage.inputPassword("User12356789");
         createAccountPage.inputConfirmPassword("User12356789");
@@ -44,6 +44,7 @@ public class CreateAccountTest extends BaseTest {
     //Empty password
     @Test
     public void emptyPass(){
+        open("http://chatty.telran-edu.de:8089/registration");
         createAccountPage.inputEmail("User456@gmail.com");
         createAccountPage.inputPassword("");
         createAccountPage.inputConfirmPassword("");
@@ -61,6 +62,7 @@ public class CreateAccountTest extends BaseTest {
     //Empty username
     @Test
     public void emptyUsername(){
+        open("http://chatty.telran-edu.de:8089/registration");
         createAccountPage.inputEmail("");
         createAccountPage.inputPassword("User12356789");
         createAccountPage.inputConfirmPassword("User12356789");
@@ -71,6 +73,7 @@ public class CreateAccountTest extends BaseTest {
     //Empty username & password
     @Test
     public void emptyUsernamePassword(){
+        open("http://chatty.telran-edu.de:8089/registration");
         createAccountPage.inputEmail("");
         createAccountPage.inputPassword("");
         createAccountPage.inputConfirmPassword("");
