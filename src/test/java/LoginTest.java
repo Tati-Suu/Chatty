@@ -33,9 +33,6 @@ public class LoginTest extends BaseTest {
             sleep(5000);
             assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
 
-
-       // loginPage.unregisteredUsernameError("Check your login and password"); // Почему он проходит ? другое сообщение же об ошибке ?
-
     }
 
     @Test
@@ -49,10 +46,6 @@ public class LoginTest extends BaseTest {
         String expectedErrorMessage = "The fields cannot be empty.";
         sleep(5000);
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
-
-       // sleep(5000);
-        //assertFalse(loginPage.isLoginButtonEnabled(), "Кнопка 'Login' должна быть неактивна");
-       // assertTrue(loginPage.isCursorProhibited(), "Курсор должен быть 'not-allowed'");
     }
     @Test
     public void testLoginButtonUnclickableWithSpecialCharactersInUsername() {
@@ -66,12 +59,6 @@ public class LoginTest extends BaseTest {
         String expectedErrorMessage = "Неравильный Username . Должен состоять из латинских букв и цифр, без спецсимволов."; // Incorrect Username. It should consist of Latin letters and numbers, without special characters.
         sleep(5000);
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
-
-
-
-        //sleep(5000);
-        //boolean isLoginButtonEnabled = loginPage.isLoginButtonEnabledWithSpecialCharacters();
-        //assertFalse(isLoginButtonEnabled, "Login button should be unclickable when username contains special characters");
     }
 
     @Test
@@ -84,13 +71,6 @@ public class LoginTest extends BaseTest {
         String expectedErrorMessage = "Неправильный  Password . Должен состоять из латинских букв, цифр и спецсимволов."; //Incorrect Password. It should consist of Latin letters, numbers, and special characters.
         sleep(5000);
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
-
-
-
-        //assertEquals("Password must be 8-100 characters and include at least one letter and one digit",
-          //      loginPage.getEmailErrorMessageWithChineseCharacters());
-
-
     }
 
     @Test
@@ -103,11 +83,8 @@ public class LoginTest extends BaseTest {
         String expectedErrorMessage = "Неправильный Password . Должен быть не менее 8 и  не более 20 символов.";
         sleep(5000);
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
-
-        //Неправильный Password . Должен быть не менее 8 и  не более 20 символов
-        //boolean isLoginButtonEnabled = loginPage.isLoginButtonEnabled();
-        //assertFalse(isLoginButtonEnabled, "Login button should be disabled when password has fewer than 8 characters");
     }
+
     @Test
     public void testNoErrorMessageAndRedirectionWithLongPassword() {
         open("http://chatty.telran-edu.de:8089");
@@ -119,8 +96,6 @@ public class LoginTest extends BaseTest {
         String expectedErrorMessage = "Неправильный Password . Должен быть не менее 8 и  не более 20 символов.";
         sleep(5000);
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
-
-        // assertTrue(!loginPage.isLoginButtonEnabled(), "Login button should be disabled when password has more than 100 characters");
 
     }
 
