@@ -1,6 +1,10 @@
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class HomePage {
@@ -35,4 +39,13 @@ public class HomePage {
     public void clickCreatePostPlusButton(){
         createPostPlusButton.shouldBe(Condition.visible).click();
     }
+
+    // Check number of post in Home page
+    private ElementsCollection elementsPost = $$("[class=\"post\"]");
+    public void checkPostsNumber(int expectedMaxSize) {  // сколько мы ожидаем увидеть постов(не более 4)
+        elementsPost.first().shouldBe(Condition.visible); // ждем, пока первый элемент станет видимым
+        elementsPost.shouldHave(CollectionCondition.size(expectedMaxSize)); //LessThanOrEqual
+    }
+
+
 }

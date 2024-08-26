@@ -24,8 +24,7 @@ public class UserProfileEditPage {
     private SelenideElement savePassButton = $x("//button[contains(@class, 'PasswordModal_pass_btn__eGL9h')]");
     private SelenideElement personalInformation = $("[class=\"post-header__feed\"]");
 
-    public SelenideElement getEditButtonPlus() {
-        return editButtonPlus;
+    public SelenideElement getEditButtonPlus() {return editButtonPlus;
     }
     public SelenideElement getNameField() {
         return nameField;
@@ -39,8 +38,7 @@ public class UserProfileEditPage {
     public SelenideElement getBirthDateField() {
         return birthDateField;
     }
-    public SelenideElement getPhoneField() {
-        return phoneField;
+    public SelenideElement getPhoneField() {return phoneField;
     }
     public SelenideElement getSaveButton() {
         return saveButton;

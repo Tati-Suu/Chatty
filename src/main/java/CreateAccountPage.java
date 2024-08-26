@@ -1,13 +1,26 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class CreateAccountPage {
-    //$("a[href='/registration']")
+    private SelenideElement dateInput = $x("//input[@id='publishDate']");
+    public void setPostDateToFuture (int daysInFuture) {
+// Установка будущей даты в формате YYYY-MM-DD
+        LocalDate futureDate = LocalDate.now().plusDays(daysInFuture);
+        String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        dateInput.setValue(formattedDate);
+    }
+
+
+
+
     private SelenideElement registrationPageRedirect = $("[href='/registration']");
     //[href="/registration"]
 

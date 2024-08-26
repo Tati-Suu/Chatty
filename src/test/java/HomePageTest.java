@@ -45,4 +45,10 @@ public class HomePageTest extends BaseTest{
         int numberOfButtons = $$("button").filterBy(attribute("data-test", "similar-posts")).size();
         assertEquals(numberOfButtons > 0, "The 'Similar Posts' button should be present, but it is missing.");
     }
+    //check number of posts on page// количество постов на странице не 4
+    @Test
+    public void checkNumberPosts(){
+        homePage.checkPostsNumber(4);
+        sleep(7000);
+    }
 }
