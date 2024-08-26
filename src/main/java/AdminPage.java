@@ -4,8 +4,9 @@ import com.codeborne.selenide.SelenideElement;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AdminPage {
 
@@ -22,6 +23,17 @@ public class AdminPage {
     private SelenideElement editUserBox = $("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(1) > td.admin-panel__btn-box > span:nth-child(2) > svg");
     private SelenideElement editUserBox9 =$("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(9) > td.admin-panel__btn-box > span:nth-child(1) > svg");                                                 //#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(4) > td.admin-panel__btn-box > span:nth-child(1) > svg
 
+    private SelenideElement emailUserBox1 =$("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(1) > td:nth-child(3)");                                                 //#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(4) > td.admin-panel__btn-box > span:nth-child(1) > svg
+//
+    private SelenideElement searchBox =$("#root > div.admin-panel__users > div > div > div > input[type=text]");
+
+   // #root > div.admin-panel__users > div > div > div > button
+   private SelenideElement searchButton =$("#root > div.admin-panel__users > div > div > div > button");
+    private SelenideElement searchResults = $("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(1) > td:nth-child(3)");
+
+   // #root > div.admin-panel__users > div > div > table > tbody
+   private SelenideElement searchResultsAfter = $("#root > div.admin-panel__users > div > div > table > tbody");
+
     public void isAdminPagePresent(String expectedText) {
         adminPageCheck.shouldHave(Condition.text(expectedText));
     }
@@ -37,8 +49,43 @@ public class AdminPage {
         }
     }
     public void trashUserBlockCheck() {
+
+        //// Сохранить email пользователя перед удалением
+        String userEmail = emailUserBox1.getText();
         trashDeleteUserButton.click();
+        sleep(3000);
+        // Проверить, что пользователь первый в списке имеет другой email
+        assertFalse(searchResults.getText().contains(userEmail));
+        //Поиск по email после удаления:
+        searchBox.setValue(userEmail);
+        sleep(3000);
+        searchButton.click();
+        sleep(3000);
+        // Проверить, что пользователь больше не отображается в результатах поиска
+        assertFalse(searchResultsAfter.getText().contains(userEmail));
+
     }
+
+//    public void userEmailSave(String expectedText) {
+//        //// Сохранить email пользователя перед удалением
+//        String userEmail = emailUserBox1.getText();
+//         emailUserBox1.shouldHave(Condition.text(userEmail));
+//    }
+//    public void userRow(String expectedText) {
+//         sleep(3000);
+//        //Поиск по email после удаления:
+//        searchBox.setValue(userEmail);
+//        sleep(10000);
+//        searchButton.click(); //
+//        sleep(3000);
+//
+//        // Проверить, что пользователь больше не отображается в результатах поиска
+//
+//        //assertFalse(searchResults.getText().contains(userEmail));
+//        //assertTrue(searchResults.getText().contains(userEmail));
+//    }
+
+
 
     public void editUserBoxClick() {
         editUserBox.click();

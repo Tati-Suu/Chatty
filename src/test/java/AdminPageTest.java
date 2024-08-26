@@ -1,11 +1,13 @@
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class AdminPageTest extends BaseTest {
     @Test
@@ -57,6 +59,18 @@ public class AdminPageTest extends BaseTest {
     }
 
     @Test
+    public void deleteUserAndVerifyRemoval() {
+        createAccountPage.inputEmail("Admin.kater3@gmail.com");
+        createAccountPage.inputPassword("123456FGHJKLLO");
+        sleep(5000);
+        createAccountPage.clickRegistrationButton();
+        sleep(5000);
+        adminPage.trashUserBlockCheck();
+        sleep(5000);
+
+    }
+
+    @Test
     public void editUserBoxClick() {
 
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
@@ -79,7 +93,7 @@ public class AdminPageTest extends BaseTest {
     }
 
     @Test
-    public void EditingUserProfileData() {
+    public void editingUserProfileData() {
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
         createAccountPage.inputPassword("123456FGHJKLLO");
         createAccountPage.clickRegistrationButton();
