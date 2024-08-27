@@ -39,7 +39,6 @@ public class HeaderPage {
         aboutUsPage.shouldBe(visible).shouldHave(text(namePageAboutValue));
     }
 
-
     private SelenideElement linkLogout = $(byXpath("//*[@href='/login']")); //[href="/login"]
     public void clickOnLogoutDropdown(){
         linkLogout.shouldBe(visible).click();
@@ -61,11 +60,4 @@ public class HeaderPage {
         headerUser.hover(); // Наведение на элемент
         return this;
     }
-
-
-
-
-
-
-
 }

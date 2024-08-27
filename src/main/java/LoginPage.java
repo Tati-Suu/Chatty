@@ -1,4 +1,5 @@
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
@@ -62,4 +63,13 @@ public class LoginPage {
     public String getWithLongPassErrorMessage(){
         return emailErrorMessage.shouldBe(visible).getText();
     }
+
+    public void login(String email, String password){
+     emailEditBox.shouldBe(visible).setValue(email);
+     passwordEditBox.setValue(password);
+     loginButton.click();
+    }
+
+
+
 }

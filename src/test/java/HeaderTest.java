@@ -42,23 +42,11 @@ public class HeaderTest extends BaseTest {
         loginPage.clickButton();
         headerPage.navPanelIsDisplayed();
     }
-    // Проверка дропдаун
-    @Test
-    public void checkDropDown() {
-        loginPage.enterEmail("ghjk2@gmail.com");
-        loginPage.enterPassword("cat2016!");
-        loginPage.clickButton();
-        headerPage.navPanelIsDisplayed();
-    }
-
-
 
     // Проверка наличия ссылки Draftв в дроп-даун меню и переход на страницу  именно Draft
     @Test
     public void checkDropdownDraft() {
-        loginPage.enterEmail("ghjk2@gmail.com");
-        loginPage.enterPassword("cat2016!");
-        loginPage.clickButton();
+        loginPage.login("ghjk2@gmail.com","cat2016!");
         headerPage.hoverDropdownMenu();
         headerPage.clickOnLinkDraft();
         draftPage.draftPageIsVisible("My drafts");
@@ -67,9 +55,7 @@ public class HeaderTest extends BaseTest {
     // Проверка наличия ссылки Logout в дроп-даун меню и переход на страницу  именно Login
     @Test
     public void checkDropdownLogout() {
-        loginPage.enterEmail("ghjk2@gmail.com");
-        loginPage.enterPassword("cat2016!");
-        loginPage.clickButton();
+        loginPage.login("ghjk2@gmail.com","cat2016!");
         headerPage.hoverDropdownMenu();
         headerPage.clickOnLogoutDropdown();
         loginPage.loginFormIsDisplayed("Login Form");
@@ -78,9 +64,7 @@ public class HeaderTest extends BaseTest {
     // Проверка наличия ссылки Your Profile в дроп-даун меню и переход на страницу  именно Personal information
     @Test
     public void checkDropdownYourProfile() {
-        loginPage.enterEmail("ghjk2@gmail.com");
-        loginPage.enterPassword("cat2016!");
-        loginPage.clickButton();
+        loginPage.login("ghjk2@gmail.com","cat2016!");
         headerPage.hoverDropdownMenu();
         headerPage.clickOnLinkProfile();
         userProfileEditPage.elemPersonalInformationIsDisplayed("Personal information");

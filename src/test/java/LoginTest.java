@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class LoginTest extends BaseTest {
-
-
     @Test
     public void AuthorizationValidData() {
         open("http://chatty.telran-edu.de:8089");
@@ -17,8 +15,6 @@ public class LoginTest extends BaseTest {
         loginPage.enterEmail("hirsch.mariia@icloud.com")
                 .enterPassword("Blabla2024!")
                 .clickButton();
-        sleep(5000);
-
     }
     @Test
     public void LoginUnregisteredUsername() {

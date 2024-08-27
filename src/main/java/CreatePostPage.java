@@ -4,9 +4,12 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -26,7 +29,8 @@ public class CreatePostPage {
 
     //Description
     private SelenideElement description = $("input[data-test='description-input']");
-    public void enterDescription(String enterDescriptionText){
+
+    public void enterDescription(String enterDescriptionText) {
         description.shouldBe(visible).setValue(enterDescriptionText);
     }
 
@@ -69,6 +73,7 @@ public class CreatePostPage {
             nameElementCreatePostForm.$(byText(elemText)).shouldBe(visible);
         }
     }
+
     //2
     public void checkElementsInPostForm() {
         nameElementCreatePostForm.shouldBe(visible);
@@ -95,7 +100,7 @@ public class CreatePostPage {
     public void checkCutDescription(String longDescriptionText) {
         enterDescription(longDescriptionText);
         String actualText = description.getValue();
-        String expectedText = longDescriptionText.length() >100 ? longDescriptionText.substring(0,100): longDescriptionText; //descriptionText.substring(0,Math.min(100,descriptionText.length()));// trimo 100 simbols
+        String expectedText = longDescriptionText.length() > 100 ? longDescriptionText.substring(0, 100) : longDescriptionText; //descriptionText.substring(0,Math.min(100,descriptionText.length()));// trimo 100 simbols
         assertEquals(expectedText, actualText);
     }
 
@@ -104,13 +109,9 @@ public class CreatePostPage {
     public void checkCutContent(String longContentText) {
         enterContent(longContentText);
         String actualText = content.getValue();
-        String expectedText = longContentText.length() >1000 ? longContentText.substring(0,1000): longContentText; //descriptionText.substring(0,Math.min(100,descriptionText.length()));// trimo 100 simbols
+        String expectedText = longContentText.length() > 1000 ? longContentText.substring(0, 1000) : longContentText; //descriptionText.substring(0,Math.min(100,descriptionText.length()));// trimo 100 simbols
         assertEquals(expectedText, actualText);
     }
-
-
-
-
 
 
 //    //прозрачный текст в поле Content
@@ -131,4 +132,20 @@ public class CreatePostPage {
 //    }
 
 
+
+
+//    public void checkPostsAreInChronologicalOrder() {
+//        // Собираем даты всех постов
+//        List<LocalDateTime> postDates = $(".post-content__top p");
+//
+//                .map(dateText -> LocalDateTime.parse(dateText, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+//                .collect(Collectors.toList());
+//
+//        // Проверяем, что даты отсортированы от новых к старым
+//        for (int i = 0; i < postDates.size() - 1; i++) {
+//            assertTrue(postDates.get(i).isAfter(postDates.get(i + 1)), "Posts are not in chronological order.");
+//        }
+//
+//
+//    }
 }
