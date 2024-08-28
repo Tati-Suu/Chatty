@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.checkerframework.checker.units.qual.C;
@@ -16,10 +17,10 @@ public class BaseTest {
         ChromeOptions options=new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
 
-
-
-        //open("http://chatty.telran-edu.de:8089/registration");
         open("http://chatty.telran-edu.de:8089/login");
+        loginPage.enterEmail("hirsch.mariia@icloud.com")
+                .enterPassword("Blabla2024!")
+                .clickButton();
 
     }
 
@@ -33,13 +34,9 @@ public class BaseTest {
     ContactUsPage contactUsPage = new ContactUsPage();
     DraftPage draftPage = new DraftPage();
     CreatePostPage createPostPage = new CreatePostPage();
-
-
     AdminPage adminPage = new AdminPage();
-
     AdminAuthPage adminAuthPage = new AdminAuthPage();
     HomePage homePage = new HomePage();
-
     CreateAccountPage createAccountPage = new CreateAccountPage();
     UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
 

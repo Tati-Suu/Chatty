@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class UserProfileEditTest extends BaseTest {
     @BeforeEach
@@ -15,14 +13,12 @@ public class UserProfileEditTest extends BaseTest {
         Configuration.browserSize = "1920x1080";
 
         open("http://chatty.telran-edu.de:8089/login");
-        LoginPage loginPage = new LoginPage();
         loginPage.enterEmail("hirsch.mariia@icloud.com")
                 .enterPassword("Blabla2024!")
                 .clickButton();
     }
     @Test
     public void EditingUserProfileData() {
-        //UserProfileEditPage userProfileEditPage = new UserProfileEditPage();
         userProfileEditPage.getUserMenu().shouldBe(visible).click();
         userProfileEditPage.getProfileLink().shouldBe(visible, visible).click();
         userProfileEditPage.getEditButtonPlus().shouldBe(visible).click();

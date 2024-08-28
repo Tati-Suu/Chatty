@@ -2,31 +2,15 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.*;
-import static java.lang.Double.parseDouble;
-import static java.util.Collections.reverseOrder;
-import static java.util.Collections.sort;
 
 public class HomePage {
 
-
-    private SelenideElement postSection = $x("//[@class='posts__section']");
-    private SelenideElement postCreationButton = $x("//[@data-test='post-headerplus']");
-    private SelenideElement titleEditBox = $x("//[@name='title']");
-    private SelenideElement descriptionEditBox = $x("//[@placeholder='Description']");
-    private SelenideElement contentEditBox = $x("//[@name='content']");
-    private SelenideElement saveAsDraftToggle = $x("//label[@for='draftCheckbox']");
-    private SelenideElement submitPostButton = $x("//[@data-test='submit']");
     private SelenideElement myPostsToggle = $x("//label[@for='myPostsId']");
     private SelenideElement firstPost = $x("//div[@data-test='post']");
 

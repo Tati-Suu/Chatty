@@ -26,31 +26,27 @@ public class CreatePostPage {
     public void enterTitle(String titleValue) {
         title.shouldBe(visible).setValue(titleValue);
     }
-
     //Description
     private SelenideElement description = $("input[data-test='description-input']");
 
     public void enterDescription(String enterDescriptionText) {
         description.shouldBe(visible).setValue(enterDescriptionText);
     }
-
     //Content
-    private SelenideElement content = $("[name=\"content\"]");
 
-    public void enterContent(String contentValue) {
+    private SelenideElement content = $("[name=\"content\"]");
+    public void enterContent(String contentValue){
         content.shouldBe(Condition.visible).setValue(contentValue);
     }
 
     //submitButton
     private SelenideElement submitButton = $(By.xpath("//button[@data-test='submit']"));
-
-    public void clickSubmitButton() {
+    public void clickSubmitButton(){
         submitButton.shouldBe(Condition.visible).click();
     }
 
     //Элементы коллекции названий моих постов
     private ElementsCollection myPosts = $$("h3");
-
     public void checkCreatedPost(String titleValue) {
         myPosts.filter(visible).findBy(Condition.text(titleValue)).shouldBe(Condition.visible);
     }
@@ -125,6 +121,8 @@ public class CreatePostPage {
 //    }
 
 
+
+
     // Photo
 //    private SelenideElement imageField = $(By.className(".post_uploaded_image__7qSWV"));
 //    public void loadImege(String filePath){   //путь к файлу
@@ -132,20 +130,4 @@ public class CreatePostPage {
 //    }
 
 
-
-
-//    public void checkPostsAreInChronologicalOrder() {
-//        // Собираем даты всех постов
-//        List<LocalDateTime> postDates = $(".post-content__top p");
-//
-//                .map(dateText -> LocalDateTime.parse(dateText, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-//                .collect(Collectors.toList());
-//
-//        // Проверяем, что даты отсортированы от новых к старым
-//        for (int i = 0; i < postDates.size() - 1; i++) {
-//            assertTrue(postDates.get(i).isAfter(postDates.get(i + 1)), "Posts are not in chronological order.");
-//        }
-//
-//
-//    }
 }

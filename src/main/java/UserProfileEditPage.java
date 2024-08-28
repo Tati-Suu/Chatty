@@ -1,13 +1,10 @@
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class UserProfileEditPage {
-
     private SelenideElement editButtonPlus = $("[data-test='post-header__plus']");
     private SelenideElement nameField = $x("//input[@name='name']");
     private SelenideElement surnameField = $x("//input[@name='surname']");

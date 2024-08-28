@@ -69,7 +69,4 @@ public class LoginPage {
      passwordEditBox.setValue(password);
      loginButton.click();
     }
-
-
-
 }
