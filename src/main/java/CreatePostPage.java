@@ -1,14 +1,19 @@
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import java.io.File;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreatePostPage {
@@ -18,28 +23,31 @@ public class CreatePostPage {
     public void enterTitle(String titleValue) {
         title.shouldBe(visible).setValue(titleValue);
     }
+
     //Description
     private SelenideElement description = $("input[data-test='description-input']");
 
     public void enterDescription(String enterDescriptionText) {
         description.shouldBe(visible).setValue(enterDescriptionText);
     }
-    //Content
 
+    //Content
     private SelenideElement content = $("[name=\"content\"]");
-    public void enterContent(String contentValue){
+
+    public void enterContent(String contentValue) {
         content.shouldBe(Condition.visible).setValue(contentValue);
     }
 
     //submitButton
     private SelenideElement submitButton = $(By.xpath("//button[@data-test='submit']"));
-    public void clickSubmitButton(){
-        submitButton.shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
-        //submitButton.shouldBe(Condition.visible).click();
+
+    public void clickSubmitButton() {
+        submitButton.shouldBe(Condition.visible).click();
     }
 
     //Элементы коллекции названий моих постов
     private ElementsCollection myPosts = $$("h3");
+
     public void checkCreatedPost(String titleValue) {
         myPosts.filter(visible).findBy(Condition.text(titleValue)).shouldBe(Condition.visible);
     }
@@ -51,31 +59,8 @@ public class CreatePostPage {
         textSaveAsADraft.shouldBe(visible).shouldHave(text(tumblerText));
     }
 
-    // Проверяем, что форма для созднания поста содержит элементы Title, Description,Content,Delay, Ppost is draft, New image
-    //1
-    private SelenideElement nameElementCreatePostForm = $("[class=\"post-form\"]");
-    List<String> expectedElements = Arrays.asList("Title", "Description", "Content", "Delay ppost to", "New image");
-
-    public void checkNameElemForm() {
-        nameElementCreatePostForm.shouldBe(visible);
-        for (String elemText : expectedElements) {
-            nameElementCreatePostForm.$(byText(elemText)).shouldBe(visible);
-        }
-    }
-
-    //2
-    public void checkElementsInPostForm() {
-        nameElementCreatePostForm.shouldBe(visible);
-        nameElementCreatePostForm.$(byText("Title")).shouldBe(visible);
-//        nameElementCreatePostForm.$(byText("Description")).shouldBe(visible);
-//        nameElementCreatePostForm.$(byText("Content")).shouldBe(visible);
-//        nameElementCreatePostForm.$(byText("Delay ppost to")).shouldBe(visible);
-//        nameElementCreatePostForm.$(byText("New image")).shouldBe(visible);
-    }
-
     // Ожидаем, что сообщение об ошибке  появится: 100 symbols max
     public void checkErrorMessageNotDisplayed(String expectedErrorText) {
-
         $(byText(expectedErrorText)).shouldHave(Condition.exist);
     }
 
@@ -108,26 +93,47 @@ public class CreatePostPage {
         String expectedText = longTitleText.length() > 40 ? longTitleText.substring(0, 40) : longTitleText; //descriptionText.substring(0,Math.min(100,descriptionText.length()));// trimo 100 simbols
         assertEquals(expectedText, actualText);
     }
+    //прозрачный текст в поле Title
+    // Проверяем, что форма для созднания поста содержит элементы Title, Description,Content,Delay, Ppost is draft, New image
 
-    //    //прозрачный текст в поле Content
-//    private SelenideElement paleTextContent = $("placeholder=\"My thoughts. No more than 1000 characters\"");
-//
-//    placeholder:"My thoughts. No more than 1000 characters"
-//    private SelenideElement textFieldContent = $("[placeholder=\"Message\"]");
-//
-//    public void checkTextContent(String textValue) {
-//        textFieldContent.shouldHave(Condition.attribute("placeholder", textValue));
-//    }
+    public void checkTextTitle(String textValue) {
+        title.shouldHave(Condition.attribute("placeholder", textValue));
+    }
+
+    public void checkTextDescription(String textValue) {
+        description.shouldHave(Condition.attribute("placeholder", textValue));
+    }
+
+    public void checkTextContent(String textValue) {
+        content.shouldHave(Condition.attribute("placeholder", textValue));
+    }
+
+    private SelenideElement divImage = $("[role=\"presentation\"]");
+
+    public void checkTextFieldImage(String textValue) {
+        divImage.shouldHave(Condition.text(textValue));
+    }
+
+    public void checkTextDraft(String textValue) {
+        textSaveAsADraft.shouldHave(Condition.text(textValue));
+    }
 
 
+    //Проверка дат для черновика: нельзя сегодня или прошедшую дату
+    private SelenideElement dateDraft = $(By.id("publishDate"));
 
+    public void setDate(String dateValue) {      //устанавливаем дату
+        dateDraft.setValue(dateValue);
+    }
 
-    // Photo
-//    private SelenideElement imageField = $(By.className(".post_uploaded_image__7qSWV"));
-//    public void loadImege(String filePath){   //путь к файлу
-//        imageField.shouldBe(Condition.visible).uploadFile(new File(filePath));
-//    }
+    public void checkInvalidDate() {
+        String currentDate = dateDraft.getValue();
+        LocalDate parseDate = LocalDate.parse(currentDate);
 
+        if (!parseDate.isAfter(LocalDate.now())) {
+            dateDraft.shouldHave(text("The date should not be current or earlier date."));
+        }
+    }
 
 
 

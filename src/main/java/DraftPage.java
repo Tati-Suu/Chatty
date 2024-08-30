@@ -74,5 +74,9 @@ public class DraftPage {
         draftsLink.shouldBe(Condition.visible, Duration.ofSeconds(10)); // эдднула дьюрейшн для указания таймаута
         draftsLink.click(); // Добавила клик потому что с другими селекторами и методами у меня не сработало почему-то
     }
-
+    private SelenideElement draftCheckboxLabel = $("label[for='draftCheckbox']");
+    // Переключила тумблер "Save as a draft"
+    public void toggleSaveAsDraft() {
+        draftCheckboxLabel.click(); // Кликаем на метку, чтобы переключить чекбокс
+    }
 }

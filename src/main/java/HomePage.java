@@ -45,6 +45,7 @@ public class HomePage {
     }
 
 
+
     //Проверяем,что наши даты отсортированы от новой даты к старой
 //    public boolean allDateIsDisplayed() {      // проверяем, что все date отображаются
 //        boolean displayed = true;

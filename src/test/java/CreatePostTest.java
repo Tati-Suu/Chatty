@@ -1,10 +1,12 @@
 import org.junit.jupiter.api.Test;
 
-public class CreatePostTest extends BaseTest{
+import java.io.File;
+
+public class CreatePostTest extends BaseTest {
 
     //Создание поста с валидными значениями
     @Test
-    public void createPost(){
+    public void createPost() {
         loginPage.enterEmail("ghjk2@gmail.com");
         loginPage.enterPassword("cat2016!");
         loginPage.clickButton();
@@ -25,14 +27,42 @@ public class CreatePostTest extends BaseTest{
         homePage.clickCreatePostPlusButton();
         createPostPage.createPostPageIsDisplayed("Save as a draft");
     }
+
     //Проверка названий элементов формы создания поста.Check if the field names in the post creation form match
     @Test
-    public void checkNameField() {
-        loginPage.enterEmail("ghjk2@gmail.com");
-        loginPage.enterPassword("cat2016!");
-        loginPage.clickButton();
+    public void checkNameFieldTitle() {
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
         homePage.clickCreatePostPlusButton();
-        createPostPage.checkElementsInPostForm();
+        createPostPage.checkTextTitle("Title");
+    }
+
+    @Test
+    public void checkNameFieldDescription() {
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.checkTextDescription("Description");
+    }
+
+    // Ожидали название поля Content,а стоит: My thoughts. No more than 1000 characters
+    @Test
+    public void checkNameFieldContent() {
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.checkTextContent("Content");
+    }
+
+    @Test
+    public void checkNameFieldImage() {
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.checkTextFieldImage("New image");
+    }
+
+    @Test
+    public void checkNameFieldDrafts() {
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.checkTextDraft("Post is draft");
     }
 
     // Field Description have more than 100 chracters. no error text 100 symbols max"
@@ -54,9 +84,7 @@ public class CreatePostTest extends BaseTest{
 
     @Test
     public void checkCutDescriptionText() {
-        loginPage.enterEmail("ghjk2@gmail.com");
-        loginPage.enterPassword("cat2016!");
-        loginPage.clickButton();
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
         homePage.clickCreatePostPlusButton();
         createPostPage.enterTitle("Soon");
         createPostPage.enterContent("The moon is beautiful!");
@@ -67,37 +95,81 @@ public class CreatePostTest extends BaseTest{
 
     @Test
     public void checkCutContentText() {
-        loginPage.enterEmail("ghjk2@gmail.com");
-        loginPage.enterPassword("cat2016!");
-        loginPage.clickButton();
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
         homePage.clickCreatePostPlusButton();
         createPostPage.enterTitle("Soon");
         createPostPage.enterDescription("Lorem ipsum dolor sit amet, consectetuer ad");
         createPostPage.checkCutContent(
                 "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor." +
-                " Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." +
-                " Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim." +
-                " Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a," +
-                " venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus." +
-                " Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, " +
-                "consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. " +
-                "Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies" +
-                " nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus." +
-                " Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. N1");
+                        " Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." +
+                        " Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim." +
+                        " Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a," +
+                        " venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus." +
+                        " Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, " +
+                        "consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. " +
+                        "Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies" +
+                        " nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus." +
+                        " Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. N1");
         createPostPage.clickSubmitButton();
     }
+    // set current or past date to draft
 
+    @Test
+    public void testCalenderOfDraftCurrentDate() {
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.enterTitle("Moon");
+        createPostPage.enterDescription("Night");
+        createPostPage.enterContent("The moon is beautiful!");
+        createPostPage.setDate("30.08.2024");
+        draftPage.toggleSaveAsDraft();
+        createPostPage.checkInvalidDate();
+    }
+
+    @Test
+    public void testCalenderOfDraftAfterDate() {
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.enterTitle("Moon");
+        createPostPage.enterDescription("Night");
+        createPostPage.enterContent("The moon is beautiful!");
+        createPostPage.setDate("22.08.2024");
+        draftPage.toggleSaveAsDraft();
+        createPostPage.checkInvalidDate();
+    }
 
     @Test
     public void checkCutTitleText() {
-        loginPage.login("hirsch.mariia@icloud.com","Blabla2024!!");
+        loginPage.login("hirsch.mariia@icloud.com", "Blabla2024!!");
         homePage.clickCreatePostPlusButton();
         createPostPage.enterDescription("Soon");
         createPostPage.enterContent("The moon is beautiful!");
         createPostPage.checkCutTitle("Lorem ipsum dolor sit amet,consectetuer adipiscing elit.");
         createPostPage.clickSubmitButton();
+    }
 
-        //loginPage.login("hirsch.mariia@icloud.com","Blabla2024!!");
+    @Test
+    public void testCalenderOfDraftValidDate() {
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.enterTitle("Moon");
+        createPostPage.enterDescription("Night");
+        createPostPage.enterContent("The moon is beautiful!");
+        createPostPage.setDate("05.09.2024");
+        draftPage.toggleSaveAsDraft();
+        createPostPage.checkInvalidDate();
+    }
+
+    @Test
+    public void inputInValidImage() {
+        File imageFile = new File("C:\\Users\\Natalia Smolnikova\\Desktop\\2024-08-02 131845.png");
+        loginPage.login("ghjk2@gmail.com", "cat2016!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.enterTitle("Moon");
+        createPostPage.enterDescription("Night");
+        createPostPage.enterContent("The moon is beautiful!");
+        createPostPage.clickOnTheImageField();
+        createPostPage.inputIImageBigSize(imageFile);
     }
 
 }

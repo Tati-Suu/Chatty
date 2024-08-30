@@ -12,14 +12,12 @@ import static com.codeborne.selenide.Selenide.$x;
 public class CreateAccountPage {
     private SelenideElement dateInput = $x("//input[@id='publishDate']");
     public void setPostDateToFuture (int daysInFuture) {
+
 // Установка будущей даты в формате YYYY-MM-DD
         LocalDate futureDate = LocalDate.now().plusDays(daysInFuture);
         String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         dateInput.setValue(formattedDate);
     }
-
-
-
 
     private SelenideElement registrationPageRedirect = $("[href='/registration']");
     //[href="/registration"]
