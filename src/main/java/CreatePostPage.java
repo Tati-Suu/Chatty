@@ -1,13 +1,9 @@
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import java.io.File;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -23,18 +19,16 @@ public class CreatePostPage {
     public void enterTitle(String titleValue) {
         title.shouldBe(visible).setValue(titleValue);
     }
-
     //Description
     private SelenideElement description = $("input[data-test='description-input']");
 
     public void enterDescription(String enterDescriptionText) {
         description.shouldBe(visible).setValue(enterDescriptionText);
     }
-
     //Content
-    private SelenideElement content = $("[name=\"content\"]");
 
-    public void enterContent(String contentValue) {
+    private SelenideElement content = $("[name=\"content\"]");
+    public void enterContent(String contentValue){
         content.shouldBe(Condition.visible).setValue(contentValue);
     }
 
@@ -47,7 +41,6 @@ public class CreatePostPage {
 
     //Элементы коллекции названий моих постов
     private ElementsCollection myPosts = $$("h3");
-
     public void checkCreatedPost(String titleValue) {
         myPosts.filter(visible).findBy(Condition.text(titleValue)).shouldBe(Condition.visible);
     }
