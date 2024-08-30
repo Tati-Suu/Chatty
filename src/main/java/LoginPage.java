@@ -1,6 +1,7 @@
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -19,12 +20,14 @@ public class LoginPage {
     private SelenideElement loginForm = $("h1");
 
     public LoginPage enterEmail(String email) {
-        emailEditBox.setValue(email);
+        //emailEditBox.setValue(email);
+        emailEditBox.shouldBe(Condition.visible, Duration.ofSeconds(10)).setValue(email);
         return this;
     }
 
     public LoginPage enterPassword(String password) {
-        passwordEditBox.setValue(password);
+        //passwordEditBox.setValue(password);
+        passwordEditBox.shouldBe(Condition.visible, Duration.ofSeconds(10)).setValue(password);
         return this;
     }
 
@@ -38,6 +41,7 @@ public class LoginPage {
         System.out.println("Error message received: " + errorMessage);
         return errorMessage;
     }
+
     public SelenideElement getPasswordRequirementsMessage() {
         return passwordRequirementsMessage;
     }
@@ -53,20 +57,22 @@ public class LoginPage {
     public String getWithWithChineseCharactersInPasswaordErrorMessage() {
         return emailErrorMessage.shouldBe(visible).getText();
     }
-    public void loginFormIsDisplayed(String textValue){
+
+    public void loginFormIsDisplayed(String textValue) {
         loginForm.shouldBe(visible).shouldHave(text(textValue));
     }
 
-    public String getWithShortPassErrorMessage(){
-        return emailErrorMessage.shouldBe(visible).getText();
-    }
-    public String getWithLongPassErrorMessage(){
+    public String getWithShortPassErrorMessage() {
         return emailErrorMessage.shouldBe(visible).getText();
     }
 
-    public void login(String email, String password){
-     emailEditBox.shouldBe(visible).setValue(email);
-     passwordEditBox.setValue(password);
-     loginButton.click();
+    public String getWithLongPassErrorMessage() {
+        return emailErrorMessage.shouldBe(visible).getText();
+    }
+
+    public void login(String email, String password) {
+        emailEditBox.shouldBe(visible).setValue(email);
+        passwordEditBox.setValue(password);
+        loginButton.click();
     }
 }

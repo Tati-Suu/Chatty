@@ -16,12 +16,7 @@ public class BaseTest {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         ChromeOptions options=new ChromeOptions();
         options.addArguments("--disable-search-engine-choice-screen");
-
         open("http://chatty.telran-edu.de:8089/login");
-        loginPage.enterEmail("hirsch.mariia@icloud.com")
-                .enterPassword("Blabla2024!")
-                .clickButton();
-
     }
 
     @AfterEach

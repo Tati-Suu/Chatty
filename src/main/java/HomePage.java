@@ -7,6 +7,8 @@ import com.codeborne.selenide.SelenideElement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class HomePage {
@@ -23,22 +25,22 @@ public class HomePage {
     }
 
     public String getMyPostsToggleText() {
-        return myPostsToggle.shouldBe(Condition.visible).getText();
+        return myPostsToggle.shouldBe(visible).getText();
     }
 
     public HomePage clickFirstPost() {
-        firstPost.shouldBe(Condition.visible).click();
+        firstPost.shouldBe(visible).click();
         return this;
     }
 
     public void clickCreatePostPlusButton(){
-        createPostPlusButton.shouldBe(Condition.visible).click();
+        createPostPlusButton.shouldBe(visible).click();
     }
 
     // Check the number of posts in a Homepage
     private ElementsCollection elementsPost = $$("[class=\"post\"]");
     public void checkPostsNumber(int expectedMaxSize) {  // сколько мы ожидаем увидеть постов(не более 4)
-        elementsPost.first().shouldBe(Condition.visible); // ждем, пока первый элемент станет видимым
+        elementsPost.first().shouldBe(visible); // ждем, пока первый элемент станет видимым
         elementsPost.shouldHave(CollectionCondition.sizeLessThanOrEqual(expectedMaxSize)); //LessThanOrEqual
     }
 
@@ -57,7 +59,7 @@ public class HomePage {
 
     private ElementsCollection listOfDates = $$(".post-content__top p");  //коллекция
     public boolean checkDateSortFromHighToLow() {
-       listOfDates.get(0).shouldBe(Condition.visible);
+       listOfDates.get(0).shouldBe(visible);
         for (SelenideElement dateElem:listOfDates) {
             System.out.println(dateElem.getText());
         }

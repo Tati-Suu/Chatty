@@ -1,7 +1,5 @@
 
 import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,19 +9,13 @@ public class LoginTest extends BaseTest {
     @Test
     public void AuthorizationValidData() {
         open("http://chatty.telran-edu.de:8089");
-        LoginPage loginPage = new LoginPage();
         loginPage.enterEmail("hirsch.mariia@icloud.com")
                 .enterPassword("Blabla2024!")
                 .clickButton();
     }
     @Test
     public void LoginUnregisteredUsername() {
-            open("http://chatty.telran-edu.de:8089");
-
-            LoginPage loginPage = new LoginPage();
-            loginPage.enterEmail("blabla@example.com")
-                    .enterPassword("Blabla2024!")
-                    .clickButton();
+        loginPage.login("hirsch.mariia@icloud.com","Blabla2024!!");
             String actualErrorMessage = loginPage.getUnregisteredUsernameErrorMessage();
             String expectedErrorMessage = "Check your login and password.";
             sleep(5000);
@@ -117,7 +109,6 @@ public class LoginTest extends BaseTest {
         loginPage.enterPassword("blabla");
 
         sleep(5000);
-        loginPage.getPasswordRequirementsMessage().shouldBe(visible);
 
         String expectedMessage = "Password must be 8-100 characters and include at least one letter and one digit";
         String actualMessage = loginPage.getPasswordRequirementsMessage().getText();

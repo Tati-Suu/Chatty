@@ -1,27 +1,19 @@
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreatePostPage {
     //title
-    private SelenideElement title = $("[data-test=\"title-input\"]");
+    private SelenideElement title = $("input[data-test='title-input']");
 
     public void enterTitle(String titleValue) {
         title.shouldBe(visible).setValue(titleValue);
@@ -42,7 +34,8 @@ public class CreatePostPage {
     //submitButton
     private SelenideElement submitButton = $(By.xpath("//button[@data-test='submit']"));
     public void clickSubmitButton(){
-        submitButton.shouldBe(Condition.visible).click();
+        submitButton.shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
+        //submitButton.shouldBe(Condition.visible).click();
     }
 
     //Элементы коллекции названий моих постов
@@ -54,7 +47,7 @@ public class CreatePostPage {
     //Проверяум по тексту , что перешли на страницу создания постов
     private SelenideElement textSaveAsADraft = $("[for=\"draftCheckbox\"]");
 
-    public void creanePostPageIsDisplayed(String tumblerText) {
+    public void createPostPageIsDisplayed(String tumblerText) {
         textSaveAsADraft.shouldBe(visible).shouldHave(text(tumblerText));
     }
 
@@ -109,8 +102,14 @@ public class CreatePostPage {
         assertEquals(expectedText, actualText);
     }
 
+    public void checkCutTitle(String longTitleText) {
+        enterTitle(longTitleText);
+        String actualText = title.getValue();
+        String expectedText = longTitleText.length() > 40 ? longTitleText.substring(0, 40) : longTitleText; //descriptionText.substring(0,Math.min(100,descriptionText.length()));// trimo 100 simbols
+        assertEquals(expectedText, actualText);
+    }
 
-//    //прозрачный текст в поле Content
+    //    //прозрачный текст в поле Content
 //    private SelenideElement paleTextContent = $("placeholder=\"My thoughts. No more than 1000 characters\"");
 //
 //    placeholder:"My thoughts. No more than 1000 characters"
@@ -128,6 +127,8 @@ public class CreatePostPage {
 //    public void loadImege(String filePath){   //путь к файлу
 //        imageField.shouldBe(Condition.visible).uploadFile(new File(filePath));
 //    }
+
+
 
 
 }

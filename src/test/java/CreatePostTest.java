@@ -23,7 +23,7 @@ public class CreatePostTest extends BaseTest{
         loginPage.enterPassword("cat2016!");
         loginPage.clickButton();
         homePage.clickCreatePostPlusButton();
-        createPostPage.creanePostPageIsDisplayed("Save as a draft");
+        createPostPage.createPostPageIsDisplayed("Save as a draft");
     }
     //Проверка названий элементов формы создания поста.Check if the field names in the post creation form match
     @Test
@@ -88,6 +88,16 @@ public class CreatePostTest extends BaseTest{
     }
 
 
+    @Test
+    public void checkCutTitleText() {
+        loginPage.login("hirsch.mariia@icloud.com","Blabla2024!!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.enterDescription("Soon");
+        createPostPage.enterContent("The moon is beautiful!");
+        createPostPage.checkCutTitle("Lorem ipsum dolor sit amet,consectetuer adipiscing elit.");
+        createPostPage.clickSubmitButton();
 
+        //loginPage.login("hirsch.mariia@icloud.com","Blabla2024!!");
+    }
 
 }
