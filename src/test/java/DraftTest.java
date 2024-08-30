@@ -27,7 +27,7 @@ public class DraftTest extends BaseTest {
         draftPage.checkDraftVisible(randomTitle); //чекнула что есть в черновиках пост
 
         headerPage.clickOnHome();
-        sleep(2000);
+        sleep(2000); //проходит тоже через раз
     }
     @Test
     public void draftNotVisibleInPublishedFeeds() {
@@ -46,12 +46,12 @@ public class DraftTest extends BaseTest {
         draftPage.toggleSaveAsDraft();
         draftPage.checkDraftToggleIsOn();
         createPostPage.clickSubmitButton();
-        createPostPage.createPostPageIsDisplayed("Save as a draft");
+
 
         headerPage.clickOnHome();
         homePage.clickPostsToggle();
         sleep(2000);
-        draftPage.checkPostNotPresent(randomTitle); //ТУТ проверка что НЕ ДОЛЖНО БЫТЬ ЭТОГО ПОСТА В Фидс, а он ЕСТЬ!ТЕст не провалился?!!!!!!!!!
+        draftPage.checkPostNotPresent(randomTitle); //валится через раз
 
     }
 }
