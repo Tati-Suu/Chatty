@@ -81,6 +81,15 @@ public class CreatePostTest extends BaseTest {
     }
 
     //Проверка обрезки текста до 100 ссимволов/Текст не обрезается
+    @Test
+    public void checkCutTitleText() {
+        loginPage.login("hirsch.mariia@icloud.com", "Blabla2024!!");
+        homePage.clickCreatePostPlusButton();
+        createPostPage.enterDescription("Soon");
+        createPostPage.enterContent("The moon is beautiful!");
+        createPostPage.checkCutTitle("Lorem ipsum dolor sit amet,consectetuer adipiscing elit.");
+        createPostPage.clickSubmitButton();
+    }
 
     @Test
     public void checkCutDescriptionText() {
@@ -138,16 +147,7 @@ public class CreatePostTest extends BaseTest {
         createPostPage.checkInvalidDate();
     }
 
-    @Test
-    public void checkCutTitleText() {
-        loginPage.login("hirsch.mariia@icloud.com", "Blabla2024!!");
-        homePage.clickCreatePostPlusButton();
-        createPostPage.enterDescription("Soon");
-        createPostPage.enterContent("The moon is beautiful!");
-        createPostPage.checkCutTitle("Lorem ipsum dolor sit amet,consectetuer adipiscing elit.");
-        createPostPage.clickSubmitButton();
-    }
-
+      //Создание поста с валидной датой черновика
     @Test
     public void testCalenderOfDraftValidDate() {
         loginPage.login("ghjk2@gmail.com", "cat2016!");
@@ -159,7 +159,7 @@ public class CreatePostTest extends BaseTest {
         draftPage.toggleSaveAsDraft();
         createPostPage.checkInvalidDate();
     }
-
+    // Проверка текста ошибки при загрузке большого размера файла(более 2Мв)
     @Test
     public void inputInValidImage() {
         File imageFile = new File("C:\\Users\\Natalia Smolnikova\\Desktop\\2024-08-02 131845.png");
@@ -168,8 +168,9 @@ public class CreatePostTest extends BaseTest {
         createPostPage.enterTitle("Moon");
         createPostPage.enterDescription("Night");
         createPostPage.enterContent("The moon is beautiful!");
-        createPostPage.clickOnTheImageField();
-        createPostPage.inputIImageBigSize(imageFile);
+        File largeImageFile = new File("C:\\Users\\Natalia Smolnikova\\Desktop\\Снимок экрана 2024-08-02 131845.png");
+        createPostPage.uploadImageInField(largeImageFile);
+        createPostPage.checkTextErrorMessage("Max size 2Mb"); //"File size exceeds the 2MB limit"
     }
 
 }

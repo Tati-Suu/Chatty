@@ -1,9 +1,13 @@
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -15,28 +19,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CreatePostPage {
     //title
     private SelenideElement title = $("input[data-test='title-input']");
-
     public void enterTitle(String titleValue) {
         title.shouldBe(visible).setValue(titleValue);
     }
+
     //Description
     private SelenideElement description = $("input[data-test='description-input']");
-
     public void enterDescription(String enterDescriptionText) {
         description.shouldBe(visible).setValue(enterDescriptionText);
     }
-    //Content
 
+    //Content
     private SelenideElement content = $("[name=\"content\"]");
-    public void enterContent(String contentValue){
+    public void enterContent(String contentValue) {
         content.shouldBe(Condition.visible).setValue(contentValue);
     }
 
     //submitButton
     private SelenideElement submitButton = $(By.xpath("//button[@data-test='submit']"));
-
     public void clickSubmitButton() {
         submitButton.shouldBe(Condition.visible).click();
+    }
+    private SelenideElement divImage = $("[role=\"presentation\"]");
+
+    public void checkTextFieldImage(String textValue) {
+        divImage.shouldHave(Condition.text(textValue));
     }
 
     //Элементы коллекции названий моих постов
@@ -86,7 +93,7 @@ public class CreatePostPage {
         String expectedText = longTitleText.length() > 40 ? longTitleText.substring(0, 40) : longTitleText; //descriptionText.substring(0,Math.min(100,descriptionText.length()));// trimo 100 simbols
         assertEquals(expectedText, actualText);
     }
-    //прозрачный текст в поле Title
+
     // Проверяем, что форма для созднания поста содержит элементы Title, Description,Content,Delay, Ppost is draft, New image
 
     public void checkTextTitle(String textValue) {
@@ -101,11 +108,6 @@ public class CreatePostPage {
         content.shouldHave(Condition.attribute("placeholder", textValue));
     }
 
-    private SelenideElement divImage = $("[role=\"presentation\"]");
-
-    public void checkTextFieldImage(String textValue) {
-        divImage.shouldHave(Condition.text(textValue));
-    }
 
     public void checkTextDraft(String textValue) {
         textSaveAsADraft.shouldHave(Condition.text(textValue));
@@ -127,7 +129,19 @@ public class CreatePostPage {
             dateDraft.shouldHave(text("The date should not be current or earlier date."));
         }
     }
+    // Поле Image
 
+    //Загрузка картинки более 2 Мв
+    private SelenideElement uploadImage = $("input[type='file']");
+    public void uploadImageInField(File file){
+        uploadImage.uploadFile(file);
+    }
+
+    // Проверка текта ошибки при загрузке большого файла
+    private SelenideElement errorMessage = $("[class=\"post_error_message__FQTrb\"]");
+    public void checkTextErrorMessage(String errorText){
+        errorMessage.shouldBe(visible).shouldHave(text(errorText));
+    }
 
 
 }

@@ -15,12 +15,10 @@ import static com.codeborne.selenide.Condition.visible;
 public class DraftPage {
 
 
-        private SelenideElement draft = $("[class=\"post-header__feed\"]");
-
-
-        public void draftPageIsVisible(String draftValue) {
-            draft.shouldBe(visible).shouldHave(text(draftValue));
-        }
+    private SelenideElement draft = $("[class=\"post-header__feed\"]");
+    public void draftPageIsVisible(String draftValue) {
+        draft.shouldBe(visible).shouldHave(text(draftValue));
+    }
 
 
     private ElementsCollection postTitles = $$("div.posts__section div.post[data-test='post']"); // коллекция для опубликованных постов, вроде сработало верно ,перебирает все посты со скроллом
@@ -64,19 +62,17 @@ public class DraftPage {
     public void checkDraftToggleIsOn() {
         $("#draftCheckbox").shouldBe(Condition.selected);
     }
+
     private SelenideElement dateDraft = $(By.id("publishDate"));
     public void setDate(String dateValue) {
         //устанавливаем дата
         dateDraft.setValue(dateValue);
     }
+
     private SelenideElement draftsLink = $("a.menu-item[href='/draft']");
     public void clickOnDraftsLink() {
         draftsLink.shouldBe(Condition.visible, Duration.ofSeconds(10)); // эдднула дьюрейшн для указания таймаута
         draftsLink.click(); // Добавила клик потому что с другими селекторами и методами у меня не сработало почему-то
     }
-    //private SelenideElement draftCheckboxLabel = $("label[for='draftCheckbox']");
-    // Переключила тумблер "Save as a draft"
-    //public void toggleSaveAsDraft() {
-     //   draftCheckboxLabel.click(); // Кликаем на метку, чтобы переключить чекбокс
-    //}
+
 }
