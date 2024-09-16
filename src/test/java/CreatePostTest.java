@@ -121,7 +121,7 @@ public class CreatePostTest extends BaseTest {
                         " Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. N1");
         createPostPage.clickSubmitButton();
     }
-    // set current or past date to draft
+    // set current or past date to draft// current Date
 
     @Test
     public void testCalenderOfDraftCurrentDate() {
@@ -130,7 +130,7 @@ public class CreatePostTest extends BaseTest {
         createPostPage.enterTitle("Moon");
         createPostPage.enterDescription("Night");
         createPostPage.enterContent("The moon is beautiful!");
-        createPostPage.setDate("30.08.2024");
+        createPostPage.setDate("24.09.2024");
         draftPage.toggleSaveAsDraft();
         createPostPage.checkInvalidDate();
     }
@@ -155,14 +155,14 @@ public class CreatePostTest extends BaseTest {
         createPostPage.enterTitle("Moon");
         createPostPage.enterDescription("Night");
         createPostPage.enterContent("The moon is beautiful!");
-        createPostPage.setDate("05.09.2024");
+        createPostPage.setDate("25.09.2024");
         draftPage.toggleSaveAsDraft();
         createPostPage.checkInvalidDate();
     }
     // Проверка текста ошибки при загрузке большого размера файла(более 2Мв)
     @Test
     public void inputInValidImage() {
-        File imageFile = new File("C:\\Users\\Natalia Smolnikova\\Desktop\\2024-08-02 131845.png");
+        //File imageFile = new File("C:\\Users\\Natalia Smolnikova\\Desktop\\2024-08-02 131845.png");
         loginPage.login("ghjk2@gmail.com", "cat2016!");
         homePage.clickCreatePostPlusButton();
         createPostPage.enterTitle("Moon");

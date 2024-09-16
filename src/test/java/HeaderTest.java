@@ -40,7 +40,7 @@ public class HeaderTest extends BaseTest {
         loginPage.enterEmail("ghjk2@gmail.com");
         loginPage.enterPassword("cat2016!");
         loginPage.clickButton();
-        headerPage.navPanelIsDisplayed();
+        headerPage.navPanelIsDisplayed("Home About Contact");
     }
 
     // Проверка наличия ссылки Draftв в дроп-даун меню и переход на страницу  именно Draft

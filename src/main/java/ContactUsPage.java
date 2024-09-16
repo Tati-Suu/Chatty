@@ -55,7 +55,7 @@ public class ContactUsPage {
         textSussesfulMessageSending.shouldHave(text(messageValue));
 
     }
-    // Заполните это поле вместо( "This value should't be blank")
+    // "Заполните это поле" вместо( "This value should't be blank")
 
     public void emptyFieldErrorMessage() {
         name.shouldHave(Condition.attributeMatching("validationMessage","This value should't be blank"));

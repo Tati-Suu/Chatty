@@ -7,16 +7,11 @@ import static com.codeborne.selenide.Selenide.$;
 
 
 public class HeaderPage {
-    // Проверка названий ссылок в хэдэре  ???
-//    private SelenideElement headerElement = $("[class=\"header-box\"]");
-//    public void headerElementIsDisplayed(String usernameValue){
-//        headerElement.shouldBe(visible).shouldHave(C("Home About ContactHello " + "Hello, " +usernameValue + "!"));
-//    }
 
     // Проверка наличия в хэдэре Home About Contact
     private SelenideElement navigationPanel = $("[class=\"header__nav-list\"]");
-    public void navPanelIsDisplayed(){
-        navigationPanel.shouldBe(visible).shouldHave(text("Home About Contact")).click();
+    public void navPanelIsDisplayed(String navPanelText){
+        navigationPanel.shouldBe(visible).shouldHave(text(navPanelText)).click();
     }
 
     private SelenideElement linkHome = $(byXpath("//*[text()='Home']"));
@@ -37,7 +32,7 @@ public class HeaderPage {
         aboutUsPage.shouldBe(visible).shouldHave(text(namePageAboutValue));
     }
 
-    private SelenideElement linkLogout = $(byXpath("//*[@href='/login']")); //[href="/login"]
+    private SelenideElement linkLogout = $(byXpath("//*[@href='/login']"));
     public void clickOnLogoutDropdown(){
         linkLogout.shouldBe(visible).click();
     }

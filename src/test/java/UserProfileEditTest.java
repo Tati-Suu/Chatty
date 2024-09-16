@@ -7,16 +7,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class UserProfileEditTest extends BaseTest {
-    @BeforeEach
-    public void setUp() {
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
 
-        open("http://chatty.telran-edu.de:8089/login");
-        loginPage.enterEmail("hirsch.mariia@icloud.com")
-                .enterPassword("Blabla2024!")
-                .clickButton();
-    }
     @Test
     public void EditingUserProfileData() {
         userProfileEditPage.getUserMenu().shouldBe(visible).click();
