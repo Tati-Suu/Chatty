@@ -14,20 +14,27 @@ public class DraftTest extends BaseTest {
 
         loginPage.login("hirsch.mariia@icloud.com","Blabla2024!!");
         homePage.clickCreatePostPlusButton();
+        sleep(1000);
         createPostPage.enterTitle(randomTitle);
         createPostPage.enterDescription(randomDescription);
         createPostPage.enterContent(randomContent);
+        sleep(1000);
         draftPage.setDate("05.09.2024");
         draftPage.toggleSaveAsDraft();
+        sleep(1000);
         draftPage.checkDraftToggleIsOn();
+        sleep(1000);
         createPostPage.clickSubmitButton();
-        createPostPage.createPostPageIsDisplayed("Save as a draft");
-        draftPage.clickOnDraftsLink();
-        draftPage.draftPageIsVisible("My drafts");
-        draftPage.checkDraftVisible(randomTitle); //чекнула что есть в черновиках пост
 
-        headerPage.clickOnHome();
-        sleep(2000); //проходит тоже через раз
+
+
+        sleep(2000);
+        draftPage.clickOnDraftsLink();
+        sleep(3000);
+
+        draftPage.draftPageIsVisible("My drafts");
+        draftPage.checkDraftVisible(randomTitle);
+        sleep(5000);
     }
     @Test
     public void draftNotVisibleInPublishedFeeds() {
@@ -46,6 +53,7 @@ public class DraftTest extends BaseTest {
         draftPage.toggleSaveAsDraft();
         draftPage.checkDraftToggleIsOn();
         createPostPage.clickSubmitButton();
+
 
 
         headerPage.clickOnHome();

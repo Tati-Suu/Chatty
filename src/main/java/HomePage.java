@@ -60,7 +60,7 @@ public class HomePage {
 
     private ElementsCollection listOfDates = $$(".post-content__top p");  //коллекция
     public boolean checkDateSortFromHighToLow() {
-       listOfDates.get(0).shouldBe(visible);
+        listOfDates.get(0).shouldBe(visible);
         for (SelenideElement dateElem:listOfDates) {
             System.out.println(dateElem.getText());
         }

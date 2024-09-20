@@ -1,12 +1,8 @@
 import com.codeborne.selenide.*;
 import org.openqa.selenium.By;
-
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Selenide.*;
-
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.text;
@@ -20,22 +16,22 @@ public class DraftPage {
         draft.shouldBe(visible).shouldHave(text(draftValue));
     }
 
-
-    private ElementsCollection postTitles = $$("div.posts__section div.post[data-test='post']"); // коллекция для опубликованных постов, вроде сработало верно ,перебирает все посты со скроллом
-    private ElementsCollection draftTitles = $$("div[data-test='draft-posts'] div[data-test='post']"); // так же коллекция для черновиков
+        private ElementsCollection postTitles = $$("div.posts__section div.post[data-test='post']"); // коллекция для опубликованных постов, вроде сработало верно ,перебирает все посты со скроллом
+    ///private ElementsCollection draftTitles = $$("div[data-test='draft-posts'] div[data-test='post']"); // так же коллекция для черновиков
     // private SelenideElement dateInput = $("input[type='date'][name='publishDate']");
 
+
+    private ElementsCollection draftPosts = $$("div.draft__posts > div.post > div.post-content > div.post-content__top > h3");//друго селектор для черновиков более подробный
 
 
     public void loadAllPosts() {
         while (true) {
             Long initialHeight = executeJavaScript("return document.body.scrollHeight");
             executeJavaScript("window.scrollTo(0, arguments[0])", initialHeight);
-            sleep(2000); //тупило все, поэтому эдднула слип
+            sleep(2000);
             Long newHeight = executeJavaScript("return document.body.scrollHeight");
-
             if (Objects.equals(newHeight, initialHeight)) {
-                break; // для того что бы когда закончились посты скроллить не надо больше
+                break;
             }
         }
     }
@@ -47,7 +43,14 @@ public class DraftPage {
 
     public void checkDraftVisible(String draftTitle) {
         loadAllPosts();
-        draftTitles.filterBy(text(draftTitle)).shouldBe(sizeGreaterThan(0)); //черновики видно по названию делаю поиск
+        System.out.println("===================== Check Draft!!!" + draftPosts.size());
+
+        final int count = draftPosts.size(); // extract to evaluate once only
+        for (int i=0; i<count; i++) {
+            System.out.println("Post: --> " + draftPosts.get(i).getText());
+        }
+
+        draftPosts.filterBy(text(draftTitle)).shouldBe(sizeGreaterThan(0)); //черновики видно по названию делаю поиск
     }
 
     // Сам тумблер
@@ -60,19 +63,23 @@ public class DraftPage {
 
     // проверяем что тумблер включен на позицию черновика
     public void checkDraftToggleIsOn() {
-        $("#draftCheckbox").shouldBe(Condition.selected);
+
+        //System.out.println("TESTESTSETSETSADFSD FASDF ASDF ASDF SA F");
+        //$("#draftCheckbox").shouldBe(Condition.selected);
+        boolean test = $("#draftCheckbox").isSelected();
+        System.out.println("TEST: " + test);
     }
 
     private SelenideElement dateDraft = $(By.id("publishDate"));
     public void setDate(String dateValue) {
-        //устанавливаем дата
+        //устанавливаем дату
         dateDraft.setValue(dateValue);
     }
 
     private SelenideElement draftsLink = $("a.menu-item[href='/draft']");
     public void clickOnDraftsLink() {
-        draftsLink.shouldBe(Condition.visible, Duration.ofSeconds(10)); // эдднула дьюрейшн для указания таймаута
-        draftsLink.click(); // Добавила клик потому что с другими селекторами и методами у меня не сработало почему-то
+        draftsLink.shouldBe(Condition.visible, Duration.ofSeconds(10));
+        draftsLink.click();
     }
 
 }

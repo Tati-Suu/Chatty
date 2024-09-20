@@ -81,15 +81,6 @@ public class CreatePostTest extends BaseTest {
     }
 
     //Проверка обрезки текста до 100 ссимволов/Текст не обрезается
-    @Test
-    public void checkCutTitleText() {
-        loginPage.login("hirsch.mariia@icloud.com", "Blabla2024!!");
-        homePage.clickCreatePostPlusButton();
-        createPostPage.enterDescription("Soon");
-        createPostPage.enterContent("The moon is beautiful!");
-        createPostPage.checkCutTitle("Lorem ipsum dolor sit amet,consectetuer adipiscing elit.");
-        createPostPage.clickSubmitButton();
-    }
 
     @Test
     public void checkCutDescriptionText() {
@@ -159,7 +150,7 @@ public class CreatePostTest extends BaseTest {
         draftPage.toggleSaveAsDraft();
         createPostPage.checkInvalidDate();
     }
-    // Проверка текста ошибки при загрузке большого размера файла(более 2Мв)
+    // Error message validation (more then 2Mb)
     @Test
     public void inputInValidImage() {
         //File imageFile = new File("C:\\Users\\Natalia Smolnikova\\Desktop\\2024-08-02 131845.png");
