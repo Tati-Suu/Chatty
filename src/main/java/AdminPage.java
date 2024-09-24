@@ -6,93 +6,50 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AdminPage {
-
     private SelenideElement adminPageCheck = $("#root > div.admin-panel__users > div > div > h1");
-            //$("[data-test='adminPanelTitle']");
-
     private SelenideElement userListTitle = $("#root > div.admin-panel__users > div > div > h2");
-
-      private ElementsCollection columnNames = $$("#root > div.admin-panel__users > div > div > table > thead > tr > th");
-
+    private ElementsCollection columnNames = $$("#root > div.admin-panel__users > div > div > table > thead > tr > th");
     private SelenideElement trashDeleteUserButton = $("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(1) > td.admin-panel__btn-box > span:nth-child(2) > svg");;
-//по ТЗ не должно удалять пользователя, должно блокировать, это баг
+    //по ТЗ не должно удалять пользователя, должно блокировать, это баг
     //нет возможности посмотреть блокированных пользователей
     private SelenideElement editUserBox = $("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(1) > td.admin-panel__btn-box > span:nth-child(2) > svg");
-    private SelenideElement editUserBox9 =$("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(9) > td.admin-panel__btn-box > span:nth-child(1) > svg");                                                 //#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(4) > td.admin-panel__btn-box > span:nth-child(1) > svg
+    private SelenideElement editUserBox9 =$("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(9) > td.admin-panel__btn-box > span:nth-child(1) > svg");
 
-    private SelenideElement emailUserBox1 =$("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(1) > td:nth-child(3)");                                                 //#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(4) > td.admin-panel__btn-box > span:nth-child(1) > svg
-//
+    private SelenideElement emailUserBox1 =$("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(1) > td:nth-child(3)");
     private SelenideElement searchBox =$("#root > div.admin-panel__users > div > div > div > input[type=text]");
-
-   // #root > div.admin-panel__users > div > div > div > button
-   private SelenideElement searchButton =$("#root > div.admin-panel__users > div > div > div > button");
+    private SelenideElement searchButton =$("#root > div.admin-panel__users > div > div > div > button");
     private SelenideElement searchResults = $("#root > div.admin-panel__users > div > div > table > tbody > tr:nth-child(1) > td:nth-child(3)");
-
-   // #root > div.admin-panel__users > div > div > table > tbody
-   private SelenideElement searchResultsAfter = $("#root > div.admin-panel__users > div > div > table > tbody");
-
+    private SelenideElement searchResultsAfter = $("#root > div.admin-panel__users > div > div > table > tbody");
     public void isAdminPagePresent(String expectedText) {
         adminPageCheck.shouldHave(Condition.text(expectedText));
     }
-
     public void userListTitleCheck(String expectedText) {
         userListTitle.shouldHave(Condition.text(expectedText));
     }
-
-
     public void columnNamesCheck(List<String> expectedColumnNames) {
         for (int i = 0; i < expectedColumnNames.size(); i++) {
             columnNames.get(i).shouldHave(Condition.text(expectedColumnNames.get(i)));
         }
     }
     public void trashUserBlockCheck() {
-
-        //// Сохранить email пользователя перед удалением
+        // Сохранить email пользователя перед удалением
         String userEmail = emailUserBox1.getText();
         trashDeleteUserButton.click();
-        sleep(3000);
         // Проверить, что пользователь первый в списке имеет другой email
         assertFalse(searchResults.getText().contains(userEmail));
         //Поиск по email после удаления:
         searchBox.setValue(userEmail);
-        sleep(3000);
         searchButton.click();
-        sleep(3000);
         // Проверить, что пользователь больше не отображается в результатах поиска
         assertFalse(searchResultsAfter.getText().contains(userEmail));
 
     }
-
-//    public void userEmailSave(String expectedText) {
-//        //// Сохранить email пользователя перед удалением
-//        String userEmail = emailUserBox1.getText();
-//         emailUserBox1.shouldHave(Condition.text(userEmail));
-//    }
-//    public void userRow(String expectedText) {
-//         sleep(3000);
-//        //Поиск по email после удаления:
-//        searchBox.setValue(userEmail);
-//        sleep(10000);
-//        searchButton.click(); //
-//        sleep(3000);
-//
-//        // Проверить, что пользователь больше не отображается в результатах поиска
-//
-//        //assertFalse(searchResults.getText().contains(userEmail));
-//        //assertTrue(searchResults.getText().contains(userEmail));
-//    }
-
-
-
     public void editUserBoxClick() {
         editUserBox.click();
         editUserBox9.click();//пользователь с номером 9 в таблице
     }
-
-
     public void createUserFromAdminCheck(String expectedText) {
         userListTitle.shouldHave(Condition.text(expectedText));//нет кнопки создать юзера  there is no button to create an account from admin
         //According to the documentation there should be a button to create an account from the admin

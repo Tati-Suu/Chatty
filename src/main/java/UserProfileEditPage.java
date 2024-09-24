@@ -60,7 +60,6 @@ public class UserProfileEditPage {
         oldPasswordField.setValue(oldPassword);
 
     }
-
     public void elemPersonalInformationIsDisplayed(String textFormValue){
         personalInformation.shouldBe(visible).shouldHave(text(textFormValue));
     }

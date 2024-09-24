@@ -1,5 +1,4 @@
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -7,7 +6,7 @@ import java.util.Arrays;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 public class AdminPageTest extends BaseTest {
     @Test
@@ -15,7 +14,6 @@ public class AdminPageTest extends BaseTest {
 
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
         createAccountPage.inputPassword("123456FGHJKLLO");
-        sleep(5000);
         createAccountPage.clickRegistrationButton();
         adminPage.isAdminPagePresent("Admin panel");
     }
@@ -25,7 +23,6 @@ public class AdminPageTest extends BaseTest {
 
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
         createAccountPage.inputPassword("123456FGHJKLLO");
-        sleep(5000);
         createAccountPage.clickRegistrationButton();
         adminPage.userListTitleCheck("List of accounts");//List of accounts - this title is specified in the requirements
     }
@@ -35,7 +32,6 @@ public class AdminPageTest extends BaseTest {
 
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
         createAccountPage.inputPassword("123456FGHJKLLO");
-        sleep(5000);
         createAccountPage.clickRegistrationButton();
         adminPage.columnNamesCheck(Arrays.asList("№","Role", "Email", "Name", "Actions"));//the names of the columns that are actually reflected on the page
         adminPage.columnNamesCheck(Arrays.asList("№","Role", "Username", "Name", "Date Created","Actions"));
@@ -49,11 +45,8 @@ public class AdminPageTest extends BaseTest {
 
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
         createAccountPage.inputPassword("123456FGHJKLLO");
-        sleep(5000);
         createAccountPage.clickRegistrationButton();
-        sleep(5000);
         adminPage.trashUserBlockCheck();
-        sleep(10000);
         //according to the technical specifications it should not delete the user, it should block it, this is a bug
         //there is no way to view blocked users
     }
@@ -62,11 +55,8 @@ public class AdminPageTest extends BaseTest {
     public void deleteUserAndVerifyRemoval() {
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
         createAccountPage.inputPassword("123456FGHJKLLO");
-        sleep(5000);
         createAccountPage.clickRegistrationButton();
-        sleep(5000);
         adminPage.trashUserBlockCheck();
-        sleep(5000);
 
     }
 
@@ -76,7 +66,6 @@ public class AdminPageTest extends BaseTest {
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
         createAccountPage.inputPassword("123456FGHJKLLO");
         createAccountPage.clickRegistrationButton();
-        sleep(10000);
         adminPage.editUserBoxClick();
     }
 
@@ -86,7 +75,6 @@ public class AdminPageTest extends BaseTest {
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
         createAccountPage.inputPassword("123456FGHJKLLO");
         createAccountPage.clickRegistrationButton();
-        sleep(10000);
         adminPage.createUserFromAdminCheck("Create account");//According to the documentation there should be a button to create an account from the admin
         //нет кнопки создать юзера
         //there is no button to create an account from admin
@@ -97,9 +85,7 @@ public class AdminPageTest extends BaseTest {
         createAccountPage.inputEmail("Admin.kater3@gmail.com");
         createAccountPage.inputPassword("123456FGHJKLLO");
         createAccountPage.clickRegistrationButton();
-        sleep(10000);
         adminPage.editUserBoxClick();
-        //userProfileEditPage.getProfileLink().shouldBe(visible, visible).click();
         userProfileEditPage.getEditButtonPlus().shouldBe(visible).click();
         userProfileEditPage.getNameField().shouldBe(visible).setValue("Lila");
         userProfileEditPage.getSurnameField().shouldBe(visible).setValue("Boss");
@@ -111,7 +97,6 @@ public class AdminPageTest extends BaseTest {
         userProfileEditPage.getNameField().shouldHave(Condition.value("Lila"));
         userProfileEditPage.getSurnameField().shouldHave(Condition.value("Boss"));
         userProfileEditPage.getGenderField().getSelectedOption().shouldHave(text("Female"));
-        //userProfileEditPage.getBirthDateField().shouldHave(Condition.value("21.03.1999"));
         userProfileEditPage.getPhoneField().shouldHave(Condition.value("+12536425857"));
     }
 

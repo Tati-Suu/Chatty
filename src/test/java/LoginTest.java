@@ -10,29 +10,24 @@ public class LoginTest extends BaseTest {
     public void AuthorizationValidData() {
         open("http://chatty.telran-edu.de:8089");
         loginPage.enterEmail("hirsch.mariia@icloud.com")
-                .enterPassword("Blabla2024!")
+                .enterPassword("NewOne!!01")
                 .clickButton();
     }
     @Test
     public void LoginUnregisteredUsername() {
-        loginPage.login("hirsch.mariia@icloud.com","Blabla2024!!");
+        loginPage.login("hirsch.mariia@icloud.com","NewOne!!01");
             String actualErrorMessage = loginPage.getUnregisteredUsernameErrorMessage();
             String expectedErrorMessage = "Check your login and password.";
-            sleep(5000);
             assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
-
     }
-
     @Test
     public void  LoginButtonUnresponsiveWithEmptyFields() {
         LoginPage loginPage = open("http://chatty.telran-edu.de:8089", LoginPage.class);
         loginPage.enterEmail("")
                 .enterPassword("");
         loginPage.clickButton();
-
         String actualErrorMessage = loginPage.getEmptyFieldsErrorMessage();
         String expectedErrorMessage = "The fields cannot be empty.";
-        sleep(5000);
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
     }
     @Test
@@ -40,15 +35,12 @@ public class LoginTest extends BaseTest {
         open("http://chatty.telran-edu.de:8089");
         LoginPage loginPage = new LoginPage();
         loginPage.enterEmail("mariia@hirsch[]@icloud.com")
-                .enterPassword("Blabla2024!");
+                .enterPassword("NewOne!!01");
         loginPage.clickButton();
-
         String actualErrorMessage = loginPage.getWithSpecialCharactersInUsernameErrorMessage();
         String expectedErrorMessage = "Неравильный Username . Должен состоять из латинских букв и цифр, без спецсимволов."; // Incorrect Username. It should consist of Latin letters and numbers, without special characters.
-        sleep(5000);
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
     }
-
     @Test
     public void testLoginButtonUnclickableWithChineseCharactersInPassword() {
         LoginPage loginPage = open("http://chatty.telran-edu.de:8089", LoginPage.class);
@@ -60,7 +52,6 @@ public class LoginTest extends BaseTest {
         sleep(5000);
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
     }
-
     @Test
     public void testLoginButtonDisabledWithShortPassword() {
         LoginPage loginPage = open("http://chatty.telran-edu.de:8089", LoginPage.class);
@@ -72,7 +63,6 @@ public class LoginTest extends BaseTest {
         sleep(5000);
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
     }
-
     @Test
     public void testNoErrorMessageAndRedirectionWithLongPassword() {
         open("http://chatty.telran-edu.de:8089");
@@ -86,7 +76,6 @@ public class LoginTest extends BaseTest {
         assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error message");
 
     }
-
     @Test
     public void testIncorrectErrorMessageForUnregisteredUsername() {
             open("http://chatty.telran-edu.de:8089");
@@ -96,26 +85,17 @@ public class LoginTest extends BaseTest {
                     .clickButton();
             String actualErrorMessage = loginPage.getUnregisteredUsernameErrorMessage();
             String expectedErrorMessage = "Check your login and password.";
-            sleep(5000);
             assertEquals(expectedErrorMessage, actualErrorMessage, "Wrong Error Message");
-
     }
-
     @Test
     public void testPasswordRequirementsMessage() {
         open("http://chatty.telran-edu.de:8089");
         LoginPage loginPage = new LoginPage();
         loginPage.enterEmail("hirsch.mariia@icloud.com");
         loginPage.enterPassword("blabla");
-
-        sleep(5000);
-
         String expectedMessage = "Password must be 8-100 characters and include at least one letter and one digit";
         String actualMessage = loginPage.getPasswordRequirementsMessage().getText();
         assertTrue(actualMessage.contains(expectedMessage),
                 "The password requirements message should contain: " + expectedMessage);
     }
-
-
-
 }

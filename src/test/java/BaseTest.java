@@ -1,7 +1,5 @@
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,14 +21,12 @@ public class BaseTest {
     public void tearDown() {
         closeWebDriver();
     }
-
     LoginPage loginPage = new LoginPage();
     HeaderPage headerPage = new HeaderPage();
     ContactUsPage contactUsPage = new ContactUsPage();
     DraftPage draftPage = new DraftPage();
     CreatePostPage createPostPage = new CreatePostPage();
     AdminPage adminPage = new AdminPage();
-    AdminAuthPage adminAuthPage = new AdminAuthPage();
     HomePage homePage = new HomePage();
     CreateAccountPage createAccountPage = new CreateAccountPage();
     UserProfileEditPage userProfileEditPage = new UserProfileEditPage();

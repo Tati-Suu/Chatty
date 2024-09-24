@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 public class CreatePostTest extends BaseTest {
-
     //Создание поста с валидными значениями
     @Test
     public void createPost() {
@@ -18,7 +17,6 @@ public class CreatePostTest extends BaseTest {
         homePage.clickPostsToggle();
         createPostPage.checkCreatedPost("Moon");
     }
-
     @Test
     public void createPostPageIsDisplayed() {
         loginPage.enterEmail("ghjk2@gmail.com");
@@ -27,7 +25,6 @@ public class CreatePostTest extends BaseTest {
         homePage.clickCreatePostPlusButton();
         createPostPage.createPostPageIsDisplayed("Save as a draft");
     }
-
     //Проверка названий элементов формы создания поста.Check if the field names in the post creation form match
     @Test
     public void checkNameFieldTitle() {
@@ -35,14 +32,12 @@ public class CreatePostTest extends BaseTest {
         homePage.clickCreatePostPlusButton();
         createPostPage.checkTextTitle("Title");
     }
-
     @Test
     public void checkNameFieldDescription() {
         loginPage.login("ghjk2@gmail.com", "cat2016!");
         homePage.clickCreatePostPlusButton();
         createPostPage.checkTextDescription("Description");
     }
-
     // Ожидали название поля Content,а стоит: My thoughts. No more than 1000 characters
     @Test
     public void checkNameFieldContent() {
@@ -50,21 +45,18 @@ public class CreatePostTest extends BaseTest {
         homePage.clickCreatePostPlusButton();
         createPostPage.checkTextContent("Content");
     }
-
     @Test
     public void checkNameFieldImage() {
         loginPage.login("ghjk2@gmail.com", "cat2016!");
         homePage.clickCreatePostPlusButton();
         createPostPage.checkTextFieldImage("New image");
     }
-
     @Test
     public void checkNameFieldDrafts() {
         loginPage.login("ghjk2@gmail.com", "cat2016!");
         homePage.clickCreatePostPlusButton();
         createPostPage.checkTextDraft("Post is draft");
     }
-
     // Field Description have more than 100 chracters. no error text 100 symbols max"
     @Test
     public void bigDescription() {
@@ -79,9 +71,7 @@ public class CreatePostTest extends BaseTest {
         createPostPage.checkErrorMessageNotDisplayed("100 symbols max");
 
     }
-
     //Проверка обрезки текста до 100 ссимволов/Текст не обрезается
-
     @Test
     public void checkCutDescriptionText() {
         loginPage.login("ghjk2@gmail.com", "cat2016!");
@@ -92,7 +82,6 @@ public class CreatePostTest extends BaseTest {
         createPostPage.clickSubmitButton();
     }
     //Проверка обрезки текста до 1000 ссимволов Contecst/Текст не обрезается, когда ввели 1001
-
     @Test
     public void checkCutContentText() {
         loginPage.login("ghjk2@gmail.com", "cat2016!");
@@ -113,7 +102,6 @@ public class CreatePostTest extends BaseTest {
         createPostPage.clickSubmitButton();
     }
     // set current or past date to draft// current Date
-
     @Test
     public void testCalenderOfDraftCurrentDate() {
         loginPage.login("ghjk2@gmail.com", "cat2016!");
@@ -125,7 +113,6 @@ public class CreatePostTest extends BaseTest {
         draftPage.toggleSaveAsDraft();
         createPostPage.checkInvalidDate();
     }
-
     @Test
     public void testCalenderOfDraftAfterDate() {
         loginPage.login("ghjk2@gmail.com", "cat2016!");
@@ -137,8 +124,7 @@ public class CreatePostTest extends BaseTest {
         draftPage.toggleSaveAsDraft();
         createPostPage.checkInvalidDate();
     }
-
-      //Создание поста с валидной датой черновика
+    //Создание поста с валидной датой черновика
     @Test
     public void testCalenderOfDraftValidDate() {
         loginPage.login("ghjk2@gmail.com", "cat2016!");
@@ -153,7 +139,6 @@ public class CreatePostTest extends BaseTest {
     // Error message validation (more then 2Mb)
     @Test
     public void inputInValidImage() {
-        //File imageFile = new File("C:\\Users\\Natalia Smolnikova\\Desktop\\2024-08-02 131845.png");
         loginPage.login("ghjk2@gmail.com", "cat2016!");
         homePage.clickCreatePostPlusButton();
         createPostPage.enterTitle("Moon");

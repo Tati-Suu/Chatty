@@ -10,7 +10,6 @@ public class HeaderTest extends BaseTest {
         headerPage.clickOnAbout();
         headerPage.namePageAboutUs("О нас");
     }
-
     // При клике на Contact попадаем на страницу "Contact Us", ожидаем  "Contact us!"
     @Test
     public void checkLinkContact() {
@@ -20,8 +19,6 @@ public class HeaderTest extends BaseTest {
         headerPage.clickOnContactHeader();
         contactUsPage.textContactPage("Contact us!");
     }
-
-
     //Clicking on “Home” in the header opens a personal blog page Подтверрждение, что на странице Home
     @Test
     public void checkLinkHome() {
@@ -32,8 +29,6 @@ public class HeaderTest extends BaseTest {
         headerPage.clickOnHome();
         homePage.clickPostsToggle();
     }
-
-
     // 3 слова Home About Contact
     @Test
     public void checkNavList() {
@@ -42,7 +37,6 @@ public class HeaderTest extends BaseTest {
         loginPage.clickButton();
         headerPage.navPanelIsDisplayed("Home About Contact");
     }
-
     // Проверка наличия ссылки Draftв в дроп-даун меню и переход на страницу  именно Draft
     @Test
     public void checkDropdownDraft() {

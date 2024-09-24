@@ -12,57 +12,31 @@ import static com.codeborne.selenide.Selenide.$x;
 public class CreateAccountPage {
     private SelenideElement dateInput = $x("//input[@id='publishDate']");
     public void setPostDateToFuture (int daysInFuture) {
-// Установка будущей даты в формате YYYY-MM-DD
+    // Установка будущей даты в формате YYYY-MM-DD
         LocalDate futureDate = LocalDate.now().plusDays(daysInFuture);
         String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         dateInput.setValue(formattedDate);
     }
 
     private SelenideElement registrationPageRedirect = $("[href='/registration']");
-    //[href="/registration"]
 
     private SelenideElement emailEditBox = $("[placeholder='Email']");
-            //$x("//[@name='email']");
     private SelenideElement passwordEditBox = $("[placeholder='Password']");
-                    //$x("//[@name='password']");
     private SelenideElement confirmPasswordEditBox = $("[placeholder='Confirm password']");
-                            //$("#root > div > div > form > label:nth-child(9) > input");
-                            //$(".input-password");
-                            //$("[placeholder='Confirm password']");
-                            //$x("//[@name='confirmPassword']"); placeholder="Confirm password"
-
-
     private SelenideElement registrationButton = $(".registration-btn");
-                                    // $x("//[@class='registration-btn']");
-                                    //$("#root > div > div > form > button");
-                                    //$(".registration-btn");
-                                    //$x("//[@class='registration-btn']");
-    //#root > div > div > form > button
     private SelenideElement passwordErrorMessage = $(".text-error");
-            //$x("(//*[@class='text-error'])[1]");
     private SelenideElement userNameErrorMessage = $(".text-error");
-
-
     //Empty
-    ////*[@id="root"]/div/div/form/div[1]     #root > div > div > form > div:nth-child(4)
     private SelenideElement userNameEmptyErrorMessage = $("#root > div > div > form > div:nth-child(4)");
     private SelenideElement passwordEmptyErrorMessage = $("#root > div > div > form > div:nth-child(6)");
-            //$(".text-error");
-            //$("br:nth-child(2)");
-   // #root > div > div > form > div.text-error
     private SelenideElement confirmPasswordEmptyErrorMessage = $("#root > div > div > form > div:nth-child(8)");
-                    //$("br:nth-child(3)");
-
-    //от Альбины
     private SelenideElement selectButton = $("select");
     private SelenideElement adminButton = $("[value=\"admin\"]");
-
-        //registrationPageRedirect
+    //registrationPageRedirect
     public CreateAccountPage clickRegistrationPageRedirect() {
         registrationPageRedirect.click();
     return new CreateAccountPage();
-}
-
+    }
     public CreateAccountPage inputEmail(String email) {
         emailEditBox.setValue(email);
         return this;
@@ -88,7 +62,6 @@ public class CreateAccountPage {
     }
 
     public void isPasswordErrorMessagePresent(String expectedText) {
-         //passwordErrorMessage.shouldBe(visible).getText().contains(text); Машин код
         passwordErrorMessage.shouldBe(Condition.visible).shouldHave(text(expectedText));
     }
 
@@ -111,8 +84,6 @@ public class CreateAccountPage {
     public void  confirmPasswordEmptyErrorMessageCheck(String expectedText) {
         confirmPasswordEmptyErrorMessage.shouldBe(Condition.visible).shouldHave(text(expectedText));
     }
-    //от Альбины
-
     public void selectAdminRoleByClick() {
         selectButton.shouldBe(visible).click();
         adminButton.shouldBe(visible).click();

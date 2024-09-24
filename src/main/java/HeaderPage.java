@@ -13,7 +13,6 @@ public class HeaderPage {
     public void navPanelIsDisplayed(String navPanelText){
         navigationPanel.shouldBe(visible).shouldHave(text(navPanelText)).click();
     }
-
     private SelenideElement linkHome = $(byXpath("//*[text()='Home']"));
     public void clickOnHome() {
         linkHome.shouldBe(visible).click();
@@ -31,7 +30,6 @@ public class HeaderPage {
     public void namePageAboutUs(String namePageAboutValue){
         aboutUsPage.shouldBe(visible).shouldHave(text(namePageAboutValue));
     }
-
     private SelenideElement linkLogout = $(byXpath("//*[@href='/login']"));
     public void clickOnLogoutDropdown(){
         linkLogout.shouldBe(visible).click();
@@ -46,7 +44,6 @@ public class HeaderPage {
     public void clickOnLinkProfile(){
         yourLinkProfile.shouldBe(visible).click();
     }
-
     // наведение мышью на элемент
     private SelenideElement headerUser = $("[class=\"header__user header__menu\"]");
     public HeaderPage hoverDropdownMenu() {
